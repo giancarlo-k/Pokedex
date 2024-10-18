@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pokédex - Preferences</title>
+  <link rel="stylesheet" href="styles/settings.css">
+  <link rel="stylesheet" href="styles/header-footer.css">
+  <link rel="icon" type="image/png" href="images/pokeball.png">
+</head>
+<body>
+
+  <div class="navbar">
+
+    <div class="page-links-box">
+      <a href="index.html">Pokédex</a>
+      <a onclick="WIP()">Items</a>
+      <a onclick="WIP()">Regions</a>
+      <a onclick="WIP()">Games</a>
+    </div>
+
+    <div class="buttons-box">
+      <a href="https://github.com/giancarlo-k/pokedex" target="_blank"><img class="github-icon" src="images/github.png"></a>
+      <a class="settings-icon" href="settings.html"><img src="images/settings.png"></a>
+    </div>
+
+  </div>
+
+
+  <div class="preferences-container">
+
+    <div class="site-form-container">
+      <div class="preference-title">General Preferences</div>
+      <div class="options-container">
+
+        <div class="preference-box">
+          <div class="dark-mode-option-label">Dark Mode -</div>
+          <label class="switch">
+            <input class="dark-mode-checkbox" type="checkbox">
+            <span class="slider round"></span>
+          </label>
+        </div><br>
+        
+
+        <div class="preference-box">
+          <div class="cache-button-box">Cache -</div>        
+          <button class="cache-button cache-pokemon">Clear Pokémon Cache</button>
+          <button class="cache-button cache-preferences">Clear Preferences Cache</button>
+          <button class="cache-button cache-all">Clear All</button>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="pokedex-form-container">
+      <div class="preference-title">Pokédex Preferences</div>
+      <div class="options-container">
+        Display Pokémon names in: <br><br>
+        English - 
+        <input name="pokemon-language" type="radio" id="0" value="English" checked><br>
+        Japanese - 
+        <input name="pokemon-language" type="radio" id="1" value="Japanese"><br>
+        Korean - 
+        <input name="pokemon-language" type="radio" id="2" value="Korean"><br>
+        Chinese (Simplified) - 
+        <input name="pokemon-language" type="radio" id="3" value="Chinese (Simplified)"><br>
+        French - 
+        <input name="pokemon-language" type="radio" id="4" value="French"><br>
+        Spanish - 
+        <input name="pokemon-language" type="radio" id="5" value="Spanish"><br>
+        German - 
+        <input name="pokemon-language" type="radio" id="6" value="German"<br>
+      </div>
+
+      
+
+    </div>
+  </div>
+
+  <footer>
+    <div>Designed and developed by <a href="https://github.com/giancarlo-k" target="_blank">Giancarlo Kite</a></div>
+    <div>Powered by <a target="_blank" href="https://pokeapi.co">PokéApi</a></div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="scripts/settings.js"></script>
+  <script src="scripts/darkMode.js" type="module"></script>
+</body>
+</html>

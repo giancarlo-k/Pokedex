@@ -1,0 +1,87 @@
+.filters-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10px;
+}
+
+.filters-box p {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.bottom-filters-box {
+  flex-direction: column;
+  row-gap: 5px;
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  padding: 5px;
+}
+
+.trait-button {
+  border: none;
+}
+
+.types-filter-box,
+.regions-filter-box {
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.types-input-fields select,
+.regions-input-fields select {
+  border: 1.7px solid #808080f2;
+  border-radius: 10px;
+  width: 70px;
+  height: 30px;
+  text-align: center;
+  outline: none;
+}
+
+.traits-filter-box {
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.traits-input-fields button {
+  border: 1.7px solid #808080f2;
+  border-radius: 10px;
+  width: 110px;
+  text-align: center;
+  padding: 7px;
+  outline: none;
+  background-color: #f2f2f2;
+  cursor: pointer;
+}
+
+
+.types-input-fields input:focus  {
+  border-color: #0084ff;
+}
+
+
+.clear-filter-button {
+  border: 2px solid #c6c6c6;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: rgb(234, 234, 234);
+  font-size: 13px;
+  cursor: pointer;
+  margin-top: 25px;
+}
+
+.clear-filter-button:hover {
+  border-color: #0084ff;
+}
+
+.top-filters-box {
+
+  display: flex;
+  width: 500px;
+  justify-content: space-around;
+}

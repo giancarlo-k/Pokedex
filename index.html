@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head > 
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pokédex</title>
+  <link rel="stylesheet" href="styles/index.css">
+  <link rel="stylesheet" href="styles/filter.css">
+  <link rel="stylesheet" href="styles/header-footer.css">
+  <link rel="icon" type="image/png" href="images/pokeball.png">
+</head>
+<body>
+
+  <button style="display: none;" class="scroll-to-bottom-button"><img src="images/arrow-down-solid.svg"></button>
+  <button style="display: none;" class="scroll-to-top-button"><img src="images/arrow-up-solid.svg"></button>
+
+  <div class="navbar">
+
+    <div class="page-links-box">
+      <a href="index.html">Pokédex</a>
+      <a onclick="WIP()">Items</a>
+      <a onclick="WIP()">Regions</a>
+      <a onclick="WIP()">Games</a>
+    </div>
+
+    <div class="buttons-box">
+      <a href="https://github.com/giancarlo-k/pokedex" target="_blank"><img class="github-icon" src="images/github.png"></a>
+      <a class="settings-icon" href="settings.html"><img src="images/settings.png"></a>
+    </div>
+
+  </div>
+
+  <div class="top"> 
+    <h1 class="region-name-title">Pokédex</h1>
+
+    <div class="amount-caught-box">
+      <span class="region-pokemon-caught">0</span>/<span class="total-region-pokemon">151</span>
+      <img class="normal-pokeball-icon" src="images/pokeball.png" width="25">
+      <img style="display: none;" class="gold-pokeball-icon" src="images/gold-pokeball.png" width="25">
+      <img style="display: none;"  class="star-icon" src="images/star.png" width="20">
+    </div>
+
+    <div class="searchbox-container">
+      <input style="text-transform: capitalize" spellcheck="false" type="text" id="pokemon-name" placeholder="Enter Pokemon Name or Dex #">
+      <button title="Random Pokémon!" class="pokeball-button"><img src="images/pokeball.png"></button>
+    </div>
+
+    <div class="filter-icon"><img class="filter-icon-img" src="images/filter.png" width="45"></div>
+
+    <div style="display: none;" class="filters-box">
+
+      <div class="top-filters-box">
+
+        <div class="regions-filter-box">
+          <p>Regions</p>
+          <div class="regions-input-fields">
+            <select class="regions-select">
+              <option value="all">All</option>
+              <option value="kanto">Kanto</option>
+              <option value="johto">Johto</option>
+              <option value="hoenn">Hoenn</option>
+              <option value="sinnoh">Sinnoh</option>
+              <option value="unova">Unova</option>
+              <option value="kalos">Kalos</option>
+              <option value="alola">Alola</option>
+              <option value="galar">Galar</option>
+              <option value="hisui">Hisui</option>
+              <option value="paldea">Paldea</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="types-filter-box">
+          <p>Types</p>
+          <div class="types-input-fields">
+  
+            <select class="type1 type-select" id="pokemonType">
+              <option value="">Type 1</option>
+              <option value="bug">Bug</option>
+              <option value="dark">Dark</option>
+              <option value="dragon">Dragon</option>
+              <option value="electric">Electric</option>
+              <option value="fairy">Fairy</option>
+              <option value="fighting">Fighting</option>
+              <option value="fire">Fire</option>
+              <option value="flying">Flying</option>
+              <option value="ghost">Ghost</option>
+              <option value="grass">Grass</option>
+              <option value="ground">Ground</option>
+              <option value="ice">Ice</option>
+              <option value="normal">Normal</option>
+              <option value="poison">Poison</option>
+              <option value="psychic">Psychic</option>
+              <option value="rock">Rock</option>
+              <option value="steel">Steel</option>
+              <option value="water">Water</option>
+            </select>
+  
+            <select class="type2 type-select" id="pokemonType">
+              <option value="">Type 2</option>
+              <option value="bug">Bug</option>
+              <option value="dark">Dark</option>
+              <option value="dragon">Dragon</option>
+              <option value="electric">Electric</option>
+              <option value="fairy">Fairy</option>
+              <option value="fighting">Fighting</option>
+              <option value="fire">Fire</option>
+              <option value="flying">Flying</option>
+              <option value="ghost">Ghost</option>
+              <option value="grass">Grass</option>
+              <option value="ground">Ground</option>
+              <option value="ice">Ice</option>
+              <option value="normal">Normal</option>
+              <option value="poison">Poison</option>
+              <option value="psychic">Psychic</option>
+              <option value="rock">Rock</option>
+              <option value="steel">Steel</option>
+              <option value="water">Water</option>
+            </select>
+            
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-filters-box">
+
+        <div class="traits-filter-box">
+          <p>Traits</p>
+          <div class="traits-input-fields">
+            <button class="trait-button" id="starter">Starter</button>
+            <button class="trait-button" id="sub">Sub-Legendary</button>
+            <button class="trait-button" id="legendary">Legendary</button>
+            <button class="trait-button" id="mythical">Mythical</button>
+          </div>
+        </div>
+      </div>
+
+        <button class="clear-filter-button">Clear Filters</button>
+
+    </div>
+  </div>
+  
+  <div class="allPokemonContainer"></div>
+
+  <footer>
+    <div>Designed and developed by <a href="https://github.com/giancarlo-k" target="_blank">Giancarlo Kite</a></div>
+    <div>Powered by <a target="_blank" href="https://pokeapi.co">PokéApi</a></div>
+  </footer>
+
+  <script src="index.js" type="module"></script>
+  <script src="scripts/darkMode.js" type="module"></script>
+  <script src="scripts/filter.js" type="module"></script>
+  <script>
+    function WIP() {
+      alert('Work in progress!')
+    }
+  </script>
+</body>
+</html>
+
+
