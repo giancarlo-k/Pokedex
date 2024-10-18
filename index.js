@@ -63,6 +63,7 @@ export async function fetchAll(region) {
     allHTML += `
     <a class="card-anchor" href="pokemon.html">     
       <div class="pokemonCard" style="border-color:  ${data_functions.typeColors[type1]}; background-color:  ${data_functions.typeColors[type1]}40;">
+      <img src="images/pokeball.png" class="caught ${isCaught}">
 
         <div style="display: none" class="icon starter-icon"><img src="images/starter.png">
           <span class="tooltip-text" >Starter</span>
@@ -80,7 +81,7 @@ export async function fetchAll(region) {
           <span class="tooltip-text">Mythical</span>
         </div>
 
-        <img src="images/pokeball.png" class="caught ${isCaught}">
+        
         <div class="pokemon-card-name-box">
           <span class="pokemon-card-name">${pokemonName}</span>
           <span class="pokemon-card-id">#${id}</span>
@@ -170,7 +171,6 @@ export async function fetchAll(region) {
   })
 
   const cardAnchor = document.querySelectorAll('.card-anchor')
-
   const darkModePreference = localStorage.getItem('darkMode');
 
   if (darkModePreference === 'true') {
@@ -179,6 +179,13 @@ export async function fetchAll(region) {
     });
   }
 
+  cardAnchor.forEach((anchor) => {
+    anchor.addEventListener('click', (e) => {
+      if (e.target.classList.contains('caught')) {
+        e.preventDefault()
+      }
+    })
+  })
 
 };
 
@@ -269,4 +276,6 @@ scrollToTopBtn.addEventListener('click', () => {
     behavior: 'smooth'
   })
 })
+
+const cardAnchor = document.querySelectorAll('.card-anchor')
 
