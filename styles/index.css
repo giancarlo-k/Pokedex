@@ -324,3 +324,14 @@ html {
 .scroll-to-top-button:hover {
   animation: rotate 1.25s;
 }
+
+.card-anchor {
+  text-decoration: none;
+  color: black;
+  transition: transform 0.35s ease;
+}
+
+.card-anchor:hover {
+  transform: scale(1.05);
+  transition: 0.35s;
+}

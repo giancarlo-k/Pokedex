@@ -61,35 +61,37 @@ export async function fetchAll(region) {
     const isCaught = caughtState[id] ? '' : 'notCaught';
 
     allHTML += `
-    <div class="pokemonCard" style="border-color:  ${data_functions.typeColors[type1]}; background-color:  ${data_functions.typeColors[type1]}40;">
+    <a class="card-anchor" href="pokemon.html">     
+      <div class="pokemonCard" style="border-color:  ${data_functions.typeColors[type1]}; background-color:  ${data_functions.typeColors[type1]}40;">
 
-      <div style="display: none" class="icon starter-icon"><img src="images/starter.png">
-        <span class="tooltip-text" >Starter</span>
-      </div>
+        <div style="display: none" class="icon starter-icon"><img src="images/starter.png">
+          <span class="tooltip-text" >Starter</span>
+        </div>
 
-      <div style="display: none" class="icon legendary-icon"><img src="images/gold-pokeball.png">
-        <span class="tooltip-text">Legendary</span>
-      </div>
+        <div style="display: none" class="icon legendary-icon"><img src="images/gold-pokeball.png">
+          <span class="tooltip-text">Legendary</span>
+        </div>
 
-      <div style="display: none" class="icon sub-legendary-icon"><img src="images/gold-pokeball.png">
-        <span class="tooltip-text">Sub-Legendary</span>
-      </div>
+        <div style="display: none" class="icon sub-legendary-icon"><img src="images/gold-pokeball.png">
+          <span class="tooltip-text">Sub-Legendary</span>
+        </div>
 
-      <div style="display: none" class="icon mythical-icon"><img src="images/purple-pokeball.png">
-        <span class="tooltip-text">Mythical</span>
-      </div>
+        <div style="display: none" class="icon mythical-icon"><img src="images/purple-pokeball.png">
+          <span class="tooltip-text">Mythical</span>
+        </div>
 
-      <img src="images/pokeball.png" class="caught ${isCaught}">
-      <div class="pokemon-card-name-box">
-        <span class="pokemon-card-name">${pokemonName}</span>
-        <span class="pokemon-card-id">#${id}</span>
+        <img src="images/pokeball.png" class="caught ${isCaught}">
+        <div class="pokemon-card-name-box">
+          <span class="pokemon-card-name">${pokemonName}</span>
+          <span class="pokemon-card-id">#${id}</span>
+        </div>
+        <img class="pokemon-sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/refs/heads/master/sprites/pokemon/other/official-artwork/${i}.png">
+        <div class='eachTypeBox ${typeClass}'>
+          <div class="type-1" style="background-color: ${data_functions.typeColors[type1]}">${utils.capitalizeFirstLetter(type1)}</div>
+          <div class="type-2"  style="background-color: ${data_functions.typeColors[type2]}">${utils.capitalizeFirstLetter(type2)}</div>
+        </div>
       </div>
-      <img class="pokemon-sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/refs/heads/master/sprites/pokemon/other/official-artwork/${i}.png">
-      <div class='eachTypeBox ${typeClass}'>
-        <div class="type-1" style="background-color: ${data_functions.typeColors[type1]}">${utils.capitalizeFirstLetter(type1)}</div>
-        <div class="type-2"  style="background-color: ${data_functions.typeColors[type2]}">${utils.capitalizeFirstLetter(type2)}</div>
-      </div>
-    </div>
+    </a>
     `;      
   }
 
@@ -166,6 +168,17 @@ export async function fetchAll(region) {
     input.value = randomPokemon;
     showPokemonCard(randomPokemon);
   })
+
+  const cardAnchor = document.querySelectorAll('.card-anchor')
+
+  const darkModePreference = localStorage.getItem('darkMode');
+
+  if (darkModePreference === 'true') {
+    cardAnchor.forEach((anchor) => {
+      anchor.style.color = 'white'
+    });
+  }
+
 
 };
 
@@ -256,3 +269,4 @@ scrollToTopBtn.addEventListener('click', () => {
     behavior: 'smooth'
   })
 })
+
