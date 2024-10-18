@@ -276,6 +276,3 @@ scrollToTopBtn.addEventListener('click', () => {
     behavior: 'smooth'
   })
 })
-
-const cardAnchor = document.querySelectorAll('.card-anchor')
-
