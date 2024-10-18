@@ -61,7 +61,7 @@ export async function fetchAll(region) {
     const isCaught = caughtState[id] ? '' : 'notCaught';
 
     allHTML += `
-    <a class="card-anchor" href="pokemon.html">     
+    <a class="card-anchor" href="pokemon.html?id=${i}">     
       <div class="pokemonCard" style="border-color:  ${data_functions.typeColors[type1]}; background-color:  ${data_functions.typeColors[type1]}40;">
       <img src="images/pokeball.png" class="caught ${isCaught}">
 

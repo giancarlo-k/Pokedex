@@ -189,7 +189,6 @@ html {
   top: 10px;
   cursor: pointer;
   animation: rotate 6s linear infinite;
-  z-index: 3;
 }
 
 .caught:hover {

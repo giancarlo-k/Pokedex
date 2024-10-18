@@ -5,9 +5,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pokédex - Charizard</title>
   <link rel="stylesheet" href="styles/pokemon.css">
+  <link rel="stylesheet" href="styles/header-footer.css">
   <link rel="icon" type="image/png" href="images/pokeball.png">
 </head>
 <body>
-  <p class="name">charizard</p>
+  <div class="navbar">
+
+    <div class="page-links-box">
+      <a href="index.html">Pokédex</a>
+      <a onclick="WIP()">Items</a>
+      <a onclick="WIP()">Regions</a>
+      <a onclick="WIP()">Games</a>
+    </div>
+
+    <div class="buttons-box">
+      <a href="https://github.com/giancarlo-k/pokedex" target="_blank"><img class="github-icon" src="images/github.png"></a>
+      <a class="settings-icon" href="settings.html"><img src="images/settings.png"></a>
+    </div>
+
+  </div>
+  
+  <main>
+    <div class="top-info-container">
+      <div class="sprite-container">
+        <img class="shiny-icon" src="images/empty-sparkling.png">
+        <img class="gif-icon" src="images/gif.png">
+        <img class="sprite-image">
+      </div>
+    </div>
+
+
+  </main>
+
+  <footer>
+    <div>Designed and developed by <a href="https://github.com/giancarlo-k" target="_blank">Giancarlo Kite</a></div>
+    <div>Powered by <a target="_blank" href="https://pokeapi.co">PokéApi</a></div>
+  </footer>
+  <script src="pokemon.js" type="module"></script>
 </body>
 </html>
