@@ -8,9 +8,8 @@ const id = parseInt(params.get("id"));
 
 async function fetchPokemonInfo() {
   const data = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`);
-  const response = await data.json();
-
   const speciesData = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`);
+  const response = await data.json();
   const speciesResponse = await speciesData.json();
 
   console.log(response)
@@ -19,7 +18,8 @@ async function fetchPokemonInfo() {
   document.querySelector('.sprite-image').src = spriteURL.official.main;
 
   spriteHandling();
-  populateBasicInfo(response.name, speciesResponse.generation.name)
+  populateBasicInfo(response.name, speciesResponse.generation.name);
+  populateMeasurements(response.weight, response.height)
 
 }
 
@@ -42,14 +42,6 @@ const populateBasicInfo = (name, gen) => {
   const genName = fixGenerationName(gen);
   nameElem.innerHTML = utils.capitalizeFirstLetter(name);
   introducedElem.innerHTML = `Introduced in ${genName}`
-}
-
-const fixGenerationName = gen => {
-  let words = gen.split('-');
-  words[0] = utils.capitalizeFirstLetter(words[0])
-  words[1] = words[1].toUpperCase();
-  let result = words.join(' ');
-  return result;
 }
 
 const spriteHandling = () => {
@@ -100,6 +92,37 @@ const spriteHandling = () => {
   };
 }
 
+const convertWeight = weight => {
+  // hectograms to pounds
+  const fixedWeight = (weight / 4.536).toFixed(1);
+  return `${fixedWeight} lbs`
+}
+
+const convertHeight = height => {
+  // decimeters to feet/inches
+  const inches = Math.round((height * 3.937))
+  const feet = Math.floor(inches / 12)
+  const remainingInches = inches % 12;
+  return `${feet}' ${remainingInches}"`;
+}
+
+const populateMeasurements = (weight, height) => {
+  const heightElem = document.querySelector('.pokemon-height')
+  const weightElem = document.querySelector('.pokemon-weight')
+  const newHeight = convertHeight(height);
+  const newWeight = convertWeight(weight);
+  weightElem.innerHTML = newWeight;
+  heightElem.innerHTML = newHeight;
+}
+
+
+const fixGenerationName = gen => {
+  let words = gen.split('-');
+  words[0] = utils.capitalizeFirstLetter(words[0])
+  words[1] = words[1].toUpperCase();
+  let result = words.join(' ');
+  return result;
+}
 
 // loads next/last page pokemon
 // function loadNextPokemon(direction) {

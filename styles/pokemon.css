@@ -33,13 +33,15 @@ main {
 
 .sprite-container {
   width: 350px;
-  height: 350px;
+  height: 375px;
   position: relative;
   background-color: #dedede;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 20px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  animation: slideFromTop 0.7s;
 }
 
 .shiny-icon {
@@ -62,6 +64,24 @@ main {
   width: 230px;
 }
 
+@keyframes slideIn {
+  0% {
+    transform: translateX(100%); /* Start off-screen to the left */
+  }
+  100% {
+    transform: translateX(0); /* Slide into place */
+  }
+}
+
+@keyframes slideFromTop {
+  0% {
+    transform: translateY(-100%); /* Start off-screen to the left */
+  }
+  100% {
+    transform: translateY(0); /* Slide into place */
+  }
+}
+
 
 /*Basic info*/
 
@@ -69,15 +89,17 @@ main {
   background-color: #dedede;
   display: flex;
   flex: 0.945;
-  height: 350px;
+  height: 375px;
   border-radius: 20px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  animation: slideIn 0.7s;
 }
+
 
 /*name and generation*/
 
 
-.name-and-gen-box {
-  height: 100px;
+.basic-box {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -88,11 +110,41 @@ main {
 
 .pokemon-name {
   font-size: 40px;
-  margin-top: 0;
 }
 
 
 .introduced-text {
   color: rgb(71, 70, 70);
+  margin-bottom: 15px;
   margin-top: -15px;
+}
+
+
+/*Types*/
+
+.type-image {
+  width: 70px;
+}
+
+.types-box {
+  margin-bottom: 25px;
+}
+
+/*Measurements*/
+
+.measurement-box {
+  margin-bottom: 20px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.measurement-box div {
+  color: rgb(71, 70, 70);
+}
+
+.measurement-box h2 {
+  font-size: 22px;
 }
