@@ -19,6 +19,7 @@ async function fetchPokemonInfo() {
   document.querySelector('.sprite-image').src = spriteURL.official.main;
 
   spriteHandling();
+  populateBasicInfo(response.name, speciesResponse.generation.name)
 
 }
 
@@ -33,6 +34,22 @@ const spriteURL = {
     main: `https://raw.githubusercontent.com/PokeAPI/sprites/refs/heads/master/sprites/pokemon/other/official-artwork/${id}.png`,
     shiny: `https://raw.githubusercontent.com/PokeAPI/sprites/refs/heads/master/sprites/pokemon/other/official-artwork/shiny/${id}.png`
   }
+}
+
+const populateBasicInfo = (name, gen) => {
+  const nameElem = document.querySelector('.pokemon-name');
+  const introducedElem = document.querySelector('.introduced-text');
+  const genName = fixGenerationName(gen);
+  nameElem.innerHTML = utils.capitalizeFirstLetter(name);
+  introducedElem.innerHTML = `Introduced in ${genName}`
+}
+
+const fixGenerationName = gen => {
+  let words = gen.split('-');
+  words[0] = utils.capitalizeFirstLetter(words[0])
+  words[1] = words[1].toUpperCase();
+  let result = words.join(' ');
+  return result;
 }
 
 const spriteHandling = () => {
@@ -82,3 +99,13 @@ const spriteHandling = () => {
     gifIcon.style.display = 'none'
   };
 }
+
+
+// loads next/last page pokemon
+// function loadNextPokemon(direction) {
+//   if (direction == 'next') {
+//     window.open(`pokemon.html?id=${id + 1}`, '_self')
+//   } else {
+//     window.open(`pokemon.html?id=${id - 1}`, '_self')
+//   } 
+// }
