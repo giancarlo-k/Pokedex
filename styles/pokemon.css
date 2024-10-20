@@ -1,8 +1,11 @@
 body {
   font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  height: 100% 
+  background-color: #e6e6e6;
+  height: 100%;
 }
 
 html {
@@ -22,8 +25,8 @@ main {
 
 .top-info-container {
   /* border: 2px solid blue; */
-  padding-left: 50px;
-  width: 100%;
+  margin-left: 30px;
+  width: 97%;
   height: 700px;
   display: flex;
   column-gap: 30px;
@@ -88,7 +91,7 @@ main {
 .basic-info-container {
   background-color: #dedede;
   display: flex;
-  flex: 0.945;
+  flex: 0.97;
   height: 375px;
   border-radius: 20px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -97,7 +100,6 @@ main {
 
 
 /*name and generation*/
-
 
 .basic-box {
   display: flex;

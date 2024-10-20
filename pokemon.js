@@ -1,4 +1,4 @@
-import  * as data_functions  from './scripts/data.js';
+import  * as data  from './scripts/data.js';
 import  * as utils  from './scripts/utils.js' 
 
 
@@ -7,9 +7,9 @@ const id = parseInt(params.get("id"));
 
 
 async function fetchPokemonInfo() {
-  const data = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`);
+  const mainData = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`);
   const speciesData = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`);
-  const response = await data.json();
+  const response = await mainData.json();
   const speciesResponse = await speciesData.json();
 
 
@@ -38,26 +38,19 @@ const spriteURL = {
 
 const getAndPopulateTypes =(response) => {
   const type1 = response.types[0].type.name;
-  createTypeImg(type1)
+  utils.createTypeImg(type1)
 
   if (response.types.length > 1) {
     const type2 = response.types[1].type.name;
-    createTypeImg(type2);
+    utils.createTypeImg(type2);
   }
 }
 
-// move to utils
-const createTypeImg = type => {
-  const typeImg = document.createElement('img')
-  typeImg.classList.add('type-image')
-  typeImg.src = `images/types/${type}.png`
-  document.querySelector('.types-box').appendChild(typeImg)
-}
 
 const populateBasicInfo = (name, gen) => {
   const nameElem = document.querySelector('.pokemon-name');
   const introducedElem = document.querySelector('.introduced-text');
-  const genName = fixGenerationName(gen);
+  const genName = utils.fixGenerationName(gen);
   nameElem.innerHTML = utils.capitalizeFirstLetter(name);
   introducedElem.innerHTML = `Introduced in ${genName}`
 }
@@ -110,38 +103,13 @@ const spriteHandling = () => {
   };
 }
 
-// move to utils
-const convertWeight = weight => {
-  // hectograms to pounds
-  const fixedWeight = (weight / 4.536).toFixed(1);
-  return `${fixedWeight} lbs`
-}
-
-// move to utils
-const convertHeight = height => {
-  // decimeters to feet/inches
-  const inches = Math.round((height * 3.937))
-  const feet = Math.floor(inches / 12)
-  const remainingInches = inches % 12;
-  return `${feet}' ${remainingInches}"`;
-}
-
 const populateMeasurements = (weight, height) => {
   const heightElem = document.querySelector('.pokemon-height')
   const weightElem = document.querySelector('.pokemon-weight')
-  const newHeight = convertHeight(height);
-  const newWeight = convertWeight(weight);
+  const newHeight = utils.convertHeight(height);
+  const newWeight = utils.convertWeight(weight);
   weightElem.innerHTML = newWeight;
   heightElem.innerHTML = newHeight;
-}
-
-// move to utils
-const fixGenerationName = gen => {
-  let words = gen.split('-');
-  words[0] = utils.capitalizeFirstLetter(words[0])
-  words[1] = words[1].toUpperCase();
-  let result = words.join(' ');
-  return result;
 }
 
 // loads next/last page pokemon
