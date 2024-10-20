@@ -12,7 +12,6 @@ async function fetchPokemonInfo() {
   const response = await data.json();
   const speciesResponse = await speciesData.json();
 
-  console.log(response)
 
   document.title = `Pokédex - ${utils.capitalizeFirstLetter(response.name)}`
   document.querySelector('.sprite-image').src = spriteURL.official.main;
@@ -20,6 +19,7 @@ async function fetchPokemonInfo() {
   spriteHandling();
   populateBasicInfo(response.name, speciesResponse.generation.name);
   populateMeasurements(response.weight, response.height)
+  getAndPopulateTypes(response)
 
 }
 
@@ -34,6 +34,24 @@ const spriteURL = {
     main: `https://raw.githubusercontent.com/PokeAPI/sprites/refs/heads/master/sprites/pokemon/other/official-artwork/${id}.png`,
     shiny: `https://raw.githubusercontent.com/PokeAPI/sprites/refs/heads/master/sprites/pokemon/other/official-artwork/shiny/${id}.png`
   }
+}
+
+const getAndPopulateTypes =(response) => {
+  const type1 = response.types[0].type.name;
+  createTypeImg(type1)
+
+  if (response.types.length > 1) {
+    const type2 = response.types[1].type.name;
+    createTypeImg(type2);
+  }
+}
+
+// move to utils
+const createTypeImg = type => {
+  const typeImg = document.createElement('img')
+  typeImg.classList.add('type-image')
+  typeImg.src = `images/types/${type}.png`
+  document.querySelector('.types-box').appendChild(typeImg)
 }
 
 const populateBasicInfo = (name, gen) => {
@@ -92,12 +110,14 @@ const spriteHandling = () => {
   };
 }
 
+// move to utils
 const convertWeight = weight => {
   // hectograms to pounds
   const fixedWeight = (weight / 4.536).toFixed(1);
   return `${fixedWeight} lbs`
 }
 
+// move to utils
 const convertHeight = height => {
   // decimeters to feet/inches
   const inches = Math.round((height * 3.937))
@@ -115,7 +135,7 @@ const populateMeasurements = (weight, height) => {
   heightElem.innerHTML = newHeight;
 }
 
-
+// move to utils
 const fixGenerationName = gen => {
   let words = gen.split('-');
   words[0] = utils.capitalizeFirstLetter(words[0])
