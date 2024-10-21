@@ -1,5 +1,46 @@
 :root {
   --description-color: #444444;
+  --box-color: #dddbdb;
+}
+
+/*animations*/
+
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(100%); /* Start off-screen to the left */
+  }
+  100% {
+    transform: translateX(0); /* Slide into place */
+  }
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%); /* Start off-screen to the left */
+  }
+  100% {
+    transform: translateX(0); /* Slide into place */
+  }
+}
+
+@keyframes slideFromTop {
+  0% {
+    transform: translateY(-100%); /* Start off-screen to the left */
+  }
+  100% {
+    transform: translateY(0); /* Slide into place */
+  }
+}
+
+@keyframes textSlideIn {
+  0% {
+    transform: translateX(30%); 
+    opacity: 0.1;
+  }
+  100% {
+    transform: translateX(0); 
+    opacity: 1;
+  }
 }
 
 body {
@@ -10,30 +51,32 @@ body {
   flex-direction: column;
   background-color: #e6e6e6;
   height: 100%;
+  overflow-x: hidden
 }
 
 html {
   height: 100%;
+  overflow-x: hidden
 }
 
 main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 110px;
+  margin-top: 95px;
   margin-bottom: 20px;
   /* border: 2px solid rgb(136, 0, 255); */
-  height: 600px;
+  height: 1000px;
   flex: 1;
 }
 
 .top-info-container {
-  /* border: 2px solid blue; */
-  margin-left: 30px;
-  width: 97%;
+  padding: 0 30px;
+  width: 100%;
   height: 700px;
   display: flex;
-  column-gap: 30px;
+  justify-content: space-around;
+  margin-top: 20px;
 }
 
 /*Sprites*/
@@ -42,13 +85,13 @@ main {
   width: 350px;
   height: 380px;
   position: relative;
-  background-color: #dedede;
+  background-color: var(--box-color);
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 20px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  animation: slideFromTop 0.7s;
+  animation: slideInFromLeft 0.7s;
 }
 
 .shiny-icon {
@@ -71,34 +114,15 @@ main {
   width: 230px;
 }
 
-@keyframes slideIn {
-  0% {
-    transform: translateX(100%); /* Start off-screen to the left */
-  }
-  100% {
-    transform: translateX(0); /* Slide into place */
-  }
-}
-
-@keyframes slideFromTop {
-  0% {
-    transform: translateY(-100%); /* Start off-screen to the left */
-  }
-  100% {
-    transform: translateY(0); /* Slide into place */
-  }
-}
-
-
 /*Basic info*/
 
 .basic-info-container {
-  background-color: #dedede;
+  background-color: var(--box-color);
   display: flex;
   height: 380px;
   border-radius: 20px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  animation: slideIn 0.7s;
+  animation: slideInFromRight 0.7s;
   width: 400px;
   justify-content: center;
 }
@@ -164,11 +188,11 @@ main {
 /*description*/
 
 .flavor-text-container {
-  background-color: #dedede;
+  background-color: var(--box-color);
   display: flex;
   border-radius: 20px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  animation: slideIn 0.8s;
+  animation: slideInFromRight 0.8s;
   width: 430px;
   justify-content: center;
   padding: 20px;
@@ -215,17 +239,48 @@ main {
   transition: 0.75s background-color ease-out;
 }
 
-@keyframes textSlideIn {
-  0% {
-    transform: translateX(30%); 
-    opacity: 0.1;
-  }
-  100% {
-    transform: translateX(0); 
-    opacity: 1;
-  }
-}
-
 .text-slide-in {
   animation: textSlideIn 0.75s;
+}
+
+/*Previous & Next Pokémon*/
+
+.next-previous-box {
+  width: 100%;
+  height: 40px;
+  top: 90px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.next, .previous {
+  display: flex;
+  margin: 0 30px;
+  align-items: center;
+  column-gap: 5px;
+  justify-content: space-around;
+  background-color: var(--box-color);
+  padding: 0 10px;
+  border-radius: 10px;
+  box-shadow: rgba(100, 100, 111, 0.122) 0px 7px 29px 0px;
+  cursor: pointer;
+  transition: background-color 0.2s ease; 
+  animation: slideFromTop 0.7s;
+}
+
+.next:hover, .previous:hover {
+  background-color: #bfbfbf;
+  transition: 0.2s;
+}
+
+.next-id, .previous-id {
+  color: var(--description-color);
+}
+
+.next-id {
+  margin-right: 5px;
+}
+
+.previous-id {
+  margin-left: 5px;
 }

@@ -5,20 +5,13 @@ import  * as utils  from './scripts/utils.js'
 const params = new URLSearchParams(window.location.search);
 const id = parseInt(params.get("id"));
 
-
 async function fetchPokemonInfo() {
   const mainData = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`);
   const speciesData = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`);
   const response = await mainData.json();
   const speciesResponse = await speciesData.json();
 
-
-
-
-
   const flavorObject = speciesResponse.flavor_text_entries
-
-  // console.log(flavorObject[3].language)
 
   let flavorArray = [];
 
@@ -49,19 +42,16 @@ async function fetchPokemonInfo() {
     }
   }
 
-  flavorText(flavorArray)
+  
 
-
-
-
-
-  document.title = `Pokédex - ${utils.capitalizeFirstLetter(response.name)}`
+  document.title = `Pokédex - ${utils.capitalizeFirstLetter(response.name)}`;
   document.querySelector('.sprite-image').src = spriteURL.official.main;
 
   spriteHandling();
   populateBasicInfo(response.name, speciesResponse.generation.name);
-  populateMeasurements(response.weight, response.height)
-  getAndPopulateTypes(response)
+  populateMeasurements(response.weight, response.height);
+  getAndPopulateTypes(response);
+  flavorText(flavorArray);
 
 }
 
@@ -155,14 +145,7 @@ const populateMeasurements = (weight, height) => {
   heightElem.innerHTML = newHeight;
 }
 
-// loads next/last page pokemon
-// function loadNextPokemon(direction) {
-//   if (direction == 'next') {
-//     window.open(`pokemon.html?id=${id + 1}`, '_self')
-//   } else {
-//     window.open(`pokemon.html?id=${id - 1}`, '_self')
-//   } 
-// }
+
 
 
 // flavor text 
@@ -212,13 +195,40 @@ function flavorText(array) {
   starFlavorTextCycle()
 }
 
-// regex
+// previous/next pokemon
+const nextOrPreviousElem = document.querySelector('.next-previous-box')
 
-// make it so that you replace every chaarceet that isnt a-zA-Z0-9.!&?
+if (id === 1) {
+  nextOrPreviousElem.querySelector('.previous').style.display = 'none';
+  nextOrPreviousElem.style.justifyContent = 'flex-end';
+} else if (id === 1025) {
+  nextOrPreviousElem.querySelector('.next').style.display = 'none';
+}
 
-//capitals -
-// [A-Z]{2,}
+nextOrPreviousElem.addEventListener('click', event => {
+  const selectedButton = event.target.id;
+  loadNextPokemon(selectedButton)
+})
 
-//random symbol - 
-// str.replace(/[^a-zA-Z0-9\.\,\'\"\!\&\(\) ]/g, ' ')
+function loadNextPokemon(direction) {
+  if (direction == 'next') {
+    window.open(`pokemon.html?id=${id + 1}`, '_self')
+  } else if (direction == 'previous') {
+    window.open(`pokemon.html?id=${id - 1}`, '_self')
+  } else {}
+}
 
+function populateNextPrevious(id) {
+  const previousImage = document.querySelector('.previous-image');
+  const previousId = document.querySelector('.previous-id');
+  const nextImage = document.querySelector('.next-image');
+  const nextId = document.querySelector('.next-id');
+
+  previousId.innerHTML = `#${utils.addDexZeros(id - 1)}`;
+  nextId.innerHTML = `#${utils.addDexZeros(id + 1)}`;
+
+  previousImage.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id - 1}.png`;
+  nextImage.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id + 1}.png`
+}
+
+populateNextPrevious(id)
