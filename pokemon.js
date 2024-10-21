@@ -13,6 +13,48 @@ async function fetchPokemonInfo() {
   const speciesResponse = await speciesData.json();
 
 
+
+
+
+  const flavorObject = speciesResponse.flavor_text_entries
+
+  // console.log(flavorObject[3].language)
+
+  let flavorArray = [];
+
+  for (let i = 0; i < flavorObject.length; i++) {
+    if (flavorObject[i].language.name == 'en') {
+      // remove weird random symbol thing 
+      let fixedFlavorText = flavorObject[i].flavor_text.replace(/[^a-zA-Z0-9é\.\,\'\’\"\!\&\(\) ]/g, ' ')
+
+      // change POKéMON from gen 1 to Pokémon
+      if (/[A-Z]{3}é[A-Z]{3}/g.test(fixedFlavorText)) {
+        fixedFlavorText = fixedFlavorText.replace(/[A-Z]{3}é[A-Z]{3}/g, 'Pokémon')
+      } 
+
+      // change capitalized pokemon names from gen 1 to normal
+      if (/[A-Z]{2,}/g.test(fixedFlavorText)) {
+        const capsMatch = fixedFlavorText.match(/[A-Z]{2,}/g);
+        const fixedCaps = utils.capitalizeFirstLetter(capsMatch.join().toLowerCase())
+        fixedFlavorText = fixedFlavorText.replace(capsMatch, fixedCaps)
+      }
+
+      if (!flavorArray.includes(fixedFlavorText)) {
+        flavorArray.push(fixedFlavorText);
+      }
+    }
+    // limit it to 5 descriptions (all in english!)
+    if (flavorArray.length === 7) {
+      break;
+    }
+  }
+
+  flavorText(flavorArray)
+
+
+
+
+
   document.title = `Pokédex - ${utils.capitalizeFirstLetter(response.name)}`
   document.querySelector('.sprite-image').src = spriteURL.official.main;
 
@@ -53,6 +95,7 @@ const populateBasicInfo = (name, gen) => {
   const genName = utils.fixGenerationName(gen);
   nameElem.innerHTML = utils.capitalizeFirstLetter(name);
   introducedElem.innerHTML = `Introduced in ${genName}`
+  document.querySelector('.dex-number').innerHTML = `#${utils.addDexZeros(id)}`
 }
 
 const spriteHandling = () => {
@@ -120,3 +163,62 @@ const populateMeasurements = (weight, height) => {
 //     window.open(`pokemon.html?id=${id - 1}`, '_self')
 //   } 
 // }
+
+
+// flavor text 
+
+function flavorText(array) {
+  const textContainer = document.querySelector('.flavor-text-box')
+  
+
+
+  array.forEach((index) => {
+    const buttonSpan = document.createElement('span')
+    document.querySelector('.flavor-text-button-list').appendChild(buttonSpan)
+  })
+
+  const textSpans = document.querySelectorAll('.flavor-text-button-list span');
+  
+  let currentIndex = 0
+  let interval;
+  
+  const loadNewText = index => {
+    textContainer.innerHTML = array[index];
+    textContainer.classList.remove('text-slide-in')
+    void textContainer.offsetWidth; 
+    textContainer.classList.add('text-slide-in');
+    textSpans.forEach((span) => span.classList.remove('active')); 
+    if (textSpans[currentIndex]) textSpans[currentIndex].classList.add('active');
+    
+  }
+  
+  const starFlavorTextCycle = () => {
+    interval = setInterval (() => {
+      currentIndex = (currentIndex + 1) % array.length
+      loadNewText(currentIndex)
+    }, 5000)
+  }
+  
+  textSpans.forEach((span, index) => {
+    span.addEventListener('click', () => {
+      clearInterval(interval)
+      currentIndex = index;
+      loadNewText(currentIndex)
+      starFlavorTextCycle()
+    })
+  })
+  
+  loadNewText(currentIndex)
+  starFlavorTextCycle()
+}
+
+// regex
+
+// make it so that you replace every chaarceet that isnt a-zA-Z0-9.!&?
+
+//capitals -
+// [A-Z]{2,}
+
+//random symbol - 
+// str.replace(/[^a-zA-Z0-9\.\,\'\"\!\&\(\) ]/g, ' ')
+

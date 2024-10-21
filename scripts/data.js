@@ -93,21 +93,10 @@ export const mythicals = [
   493, 494, 647, 648, 649, 719, 720, 721, 
   801, 802, 807, 808, 809, 893, 1025];
 
-export const mascots = {
-    kanto: 'pikachu.png',
-    johto: 'celebi.png',
-    hoenn: 'rayquaza.png',
-    sinnoh: 'luxray.png',
-    unova: 'emolga.png',
-    kalos: 'greninja.png',
-    alola: 'zeraora.png',
-    galar: 'kubfu.png',
-    hisui: 'sneasler.png',
-    paldea: 'iron_valiant.png'
-  };
-
 export const validTypes = [
   "bug", "dark", "dragon", "electric", "fairy", "fighting", 
   "fire", "flying", "ghost", "grass", "ground", "ice", 
   "normal", "poison", "psychic", "rock", "steel", "water"
 ];
+
+export const heaviest = [790, 797, 890, 383, 750, 799, 805, 896, 809, 975];
