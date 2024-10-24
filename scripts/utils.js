@@ -39,3 +39,10 @@ export const fixGenerationName = gen => {
   let result = words.join(' ');
   return result;
 }
+
+export const fixDashedStrings = str => {
+  return str
+    .split('-')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(' ');
+}

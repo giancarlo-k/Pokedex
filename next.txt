@@ -1,5 +1,2 @@
-NEXT/PREVIOUS POKEMON
-  Format: <- (sprite) #id
-
-ABILITIES
-  under the description box
+TRAITS
+  display pokemon trait if it has one (starter, mythical, legendary, sub)

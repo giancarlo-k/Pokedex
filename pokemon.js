@@ -1,4 +1,4 @@
-import  * as data  from './scripts/data.js';
+import  * as data from './scripts/data.js';
 import  * as utils  from './scripts/utils.js' 
 
 
@@ -10,6 +10,8 @@ async function fetchPokemonInfo() {
   const speciesData = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`);
   const response = await mainData.json();
   const speciesResponse = await speciesData.json();
+
+  // flavor text (descriptions)
 
   const flavorObject = speciesResponse.flavor_text_entries
 
@@ -36,13 +38,14 @@ async function fetchPokemonInfo() {
         flavorArray.push(fixedFlavorText);
       }
     }
-    // limit it to 5 descriptions (all in english!)
+    // limit it to 7 descriptions (all in english!)
     if (flavorArray.length === 7) {
       break;
     }
   }
 
-  
+  // abilities
+  populateAbilities(response)
 
   document.title = `Pokédex - ${utils.capitalizeFirstLetter(response.name)}`;
   document.querySelector('.sprite-image').src = spriteURL.official.main;
@@ -78,12 +81,27 @@ const getAndPopulateTypes =(response) => {
   }
 }
 
-
 const populateBasicInfo = (name, gen) => {
   const nameElem = document.querySelector('.pokemon-name');
   const introducedElem = document.querySelector('.introduced-text');
   const genName = utils.fixGenerationName(gen);
-  nameElem.innerHTML = utils.capitalizeFirstLetter(name);
+
+  //fix dashed names
+  if (/.+-.+/g.test(name) && !data.dashOutliers.includes(id)) {
+    nameElem.innerHTML = utils.fixDashedStrings(name)
+  } else {
+    nameElem.innerHTML = utils.capitalizeFirstLetter(name);    
+  }
+
+  // outliers
+  if (id === 122) {
+    nameElem.innerHTML = 'Mr. Mime';    
+  } else if (id === 439) {
+    nameElem.innerHTML = 'Mime Jr.';
+  } else if (id === 866) {
+    nameElem.innerHTML = 'Mr. Rime';
+  }
+
   introducedElem.innerHTML = `Introduced in ${genName}`
   document.querySelector('.dex-number').innerHTML = `#${utils.addDexZeros(id)}`
 }
@@ -141,12 +159,11 @@ const populateMeasurements = (weight, height) => {
   const weightElem = document.querySelector('.pokemon-weight')
   const newHeight = utils.convertHeight(height);
   const newWeight = utils.convertWeight(weight);
+
+
   weightElem.innerHTML = newWeight;
   heightElem.innerHTML = newHeight;
 }
-
-
-
 
 // flavor text 
 
@@ -232,3 +249,47 @@ function populateNextPrevious(id) {
 }
 
 populateNextPrevious(id)
+
+
+// abilities 
+
+function populateAbilities(res) {
+  let abilityHTML = ''
+  const seenAbilities = new Set();
+  const abilityTextBoxElem = document.querySelector('.abilities-text-container');
+
+  res.abilities.forEach((abilityObject) => {
+    let abilityName = '';
+
+    if (/.+-.+/g.test(abilityObject.ability.name)) {
+      abilityName = utils.fixDashedStrings(abilityObject.ability.name)
+    } else {
+      abilityName = utils.capitalizeFirstLetter(abilityObject.ability.name);
+    }
+
+    if (seenAbilities.has(abilityName)) return;
+    
+    seenAbilities.add(abilityName);
+    const abilityURL = abilityObject.ability.url;
+
+    fetch(abilityURL)
+      .then((response) => response.json())
+      .then((abilityData) => {
+        let abilityDescription = ''
+        if (abilityData.effect_entries.length === 0) {
+          abilityDescription = abilityData.flavor_text_entries.find((entry) => entry.language.name === 'en').flavor_text;
+        } else {
+          abilityDescription = abilityData.effect_entries.find(
+            (entry) => entry.language.name === 'en').short_effect;          
+        }
+          abilityHTML += `
+            <div class="ability">
+              <div class="ability-name">${abilityName}</div>
+              <div class="ability-description">${abilityDescription}</div>
+            </div>
+          `
+          abilityTextBoxElem.innerHTML = abilityHTML
+      })
+  })
+}
+

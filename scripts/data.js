@@ -99,4 +99,4 @@ export const validTypes = [
   "normal", "poison", "psychic", "rock", "steel", "water"
 ];
 
-export const heaviest = [790, 797, 890, 383, 750, 799, 805, 896, 809, 975];
+export const dashOutliers = [250, 474, 782, 783, 784, 1001, 1002, 1003, 1004];
