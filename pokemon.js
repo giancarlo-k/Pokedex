@@ -47,7 +47,12 @@ async function fetchPokemonInfo() {
   // abilities
   populateAbilities(response)
 
-  document.title = `Pokédex - ${utils.capitalizeFirstLetter(response.name)}`;
+  if (/.+-.+/g.test(response.name)) {
+    document.title = `Pokédex - ${utils.fixDashedStrings(response.name)}`;
+  } else {
+    document.title = `Pokédex - ${utils.capitalizeFirstLetter(response.name)}`;
+  }
+
   document.querySelector('.sprite-image').src = spriteURL.official.main;
 
   spriteHandling();
@@ -259,6 +264,7 @@ function populateAbilities(res) {
   const abilityTextBoxElem = document.querySelector('.abilities-text-container');
 
   res.abilities.forEach((abilityObject) => {
+
     let abilityName = '';
 
     if (/.+-.+/g.test(abilityObject.ability.name)) {
@@ -284,7 +290,13 @@ function populateAbilities(res) {
         }
           abilityHTML += `
             <div class="ability">
-              <div class="ability-name">${abilityName}</div>
+              <div class="ability-name">
+                ${abilityName}
+                <div class="hidden-ability">
+                  <img style="display: ${abilityObject.is_hidden ? 'flex' : 'none'}" width="20" src="images/hide.png">
+                  <span class="tooltip-text">Hidden Ability</span>
+                </div>
+              </div>
               <div class="ability-description">${abilityDescription}</div>
             </div>
           `

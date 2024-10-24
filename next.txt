@@ -1,2 +1,0 @@
-TRAITS
-  display pokemon trait if it has one (starter, mythical, legendary, sub)
