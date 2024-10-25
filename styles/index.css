@@ -323,7 +323,7 @@ html {
 
 /*---------------------------------Responsiveness---------------------------------*/
 
-@media only screen and (min-width: 360px) {
+@media only screen and (max-width: 700px) {
 
   /*Search*/
 
@@ -435,5 +435,13 @@ html {
     width: 25px;
     top: 10px;
     right: 10px
+  }
+
+  .scroll-to-top-button {
+    left: 5px;
+  }
+
+  .scroll-to-bottom-button {
+    right: 5px;
   }
 }
