@@ -25,7 +25,6 @@
 
 .types-filter-box,
 .regions-filter-box {
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -42,7 +41,6 @@
 }
 
 .traits-filter-box {
-
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -84,4 +82,25 @@
   display: flex;
   width: 500px;
   justify-content: space-around;
+}
+
+
+
+@media only screen and (min-width: 360px) {
+  .traits-filter-box {
+    width: 50%;   
+  }
+
+  .bottom-filters-box {
+    align-items: center;
+  }
+
+  .traits-input-fields {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 10px;
+    column-gap: 10px;
+  }
 }

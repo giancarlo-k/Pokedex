@@ -18,7 +18,7 @@ body {
   z-index: 2;
   border-bottom: 2px solid #8080806c;
 }
-/*Navbar*/
+
 .navbar a img {
   cursor: pointer;
   width: 30px;
@@ -28,6 +28,7 @@ body {
   display: flex;
   align-items: center;
 }
+
 .settings-icon {
   margin-left: 20px;
   margin-right: 35px;
@@ -77,4 +78,49 @@ footer div a {
 
 footer div a:hover {
   color: #0084ff;
+}
+
+/*---------------------------------Responsiveness---------------------------------*/
+
+
+@media only screen and (min-width: 360px) {
+
+  footer {
+    border-top: 2px solid #8080806c;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 70px;
+    margin-top: 20px;
+    font-size: 10px;
+  }
+
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    position: fixed; 
+    width: 100%;
+    background-color: #e6e6e6;
+    z-index: 2;
+    border-bottom: 2px solid #8080806c;
+    font-size: 14px;
+  }
+
+  .page-links-box {
+    margin-left: 30px;
+    column-gap: 15px;
+    display: flex;
+  }
+  
+  
+  .navbar a img {
+    width: 25px;
+  }
+  
+  .settings-icon {
+    margin-right: 25px;
+  }
+  
 }
