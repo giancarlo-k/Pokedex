@@ -50,12 +50,6 @@ body {
   display: flex;
   flex-direction: column;
   background-color: #e6e6e6;
-  height: 100%;
-  overflow-x: hidden
-}
-
-html {
-  height: 100%;
   overflow-x: hidden
 }
 
@@ -70,6 +64,7 @@ main {
   width: 100%;
   align-self: center;
   position: relative;
+
 }
 
 .top-info-container {
@@ -80,7 +75,7 @@ main {
   display: flex;
   justify-content: space-around;
   margin-top: 20px;
-  margin-bottom: 35px;
+  margin-bottom: 40px;
 }
 
 /*Sprites*/
@@ -367,9 +362,8 @@ main {
 /*bottom container*/
 
 .bottom-info-container {
-
   width: 100%;
-  height: 700px;
+  height: 400px;
   display: flex;
   justify-content: space-around;
 }
@@ -383,33 +377,59 @@ main {
   position: relative;
   background-color: var(--box-color);
   display: flex;
-  align-items: center;
   justify-content: center;
   border-radius: 20px;
   box-shadow: rgba(100, 100, 111, 0.3) 0px 7px 29px 0px;
-  animation: slideInFromLeft 0.7s;
+  animation: slideInFromRight 0.9s;
+  text-align: left;
+  flex-direction: column;
 }
 
-.followGod {
-  width: 300px;
+.stats-container span {
+  color: var(--description-color);
+
+}
+
+.stat-bars-box {
+  margin-top: 20px;
+  width: 100%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 7%;
+}
+
+.bar-box {
+  width: 100%;
+  display: flex;
+  column-gap: 15px;
+}
+
+.stat-name-box {
+  width: 135px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.stat-name-box span {
+  color: black;
+}
+
+.bar {
+  flex: 1;
   height: 20px;
   background-color: #bfbfbf;
   border-radius: 20px;
 }
 
-.followGod div {
+.inner-bar {
   background-color: green;
-  width: 31.3%;
   height: 20px;
-  border-radius: 20px;
-  animation: followGod 1s ease-in-out;
+  border-radius: 20px 0 0 20px;
 }
 
-@keyframes followGod {
-  0% {
-    width: 0%;
-  }
-  100% {
-    width: 31.3%;
-  }
+.total-bar {
+  background-color: rgb(33, 0, 249);
 }

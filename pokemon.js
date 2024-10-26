@@ -11,6 +11,10 @@ async function fetchPokemonInfo() {
   const response = await mainData.json();
   const speciesResponse = await speciesData.json();
 
+  // console.log(response.types[0].type.name)
+
+  
+
   // flavor text (descriptions)
 
   const flavorObject = speciesResponse.flavor_text_entries
@@ -60,6 +64,7 @@ async function fetchPokemonInfo() {
   populateMeasurements(response.weight, response.height);
   getAndPopulateTypes(response);
   flavorText(flavorArray);
+  populateStats(response);
 
 }
 
@@ -305,3 +310,77 @@ function populateAbilities(res) {
   })
 }
 
+// Stats
+
+function populateStats(res) {
+  const barValues = document.querySelectorAll('.stat-value');
+  const innerBarValues = document.querySelectorAll('.inner-bar');
+  let total = 0;
+  barValues.forEach((stat) => {
+    switch(stat.id) {
+      case('hp'):
+        stat.innerHTML = res.stats[0].base_stat;
+        total += res.stats[0].base_stat;
+        break;
+      case('attack'):
+        stat.innerHTML = res.stats[1].base_stat;
+        total += res.stats[1].base_stat;
+        break;
+      case('defense'):
+        stat.innerHTML = res.stats[2].base_stat;
+        total += res.stats[2].base_stat;
+        break;
+      case('spAttack'):
+        stat.innerHTML = res.stats[3].base_stat;
+        total += res.stats[3].base_stat;
+        break;
+      case('spDefense'):
+        stat.innerHTML = res.stats[4].base_stat;
+        total += res.stats[4].base_stat;
+        break;
+      case('speed'):
+        stat.innerHTML = res.stats[5].base_stat;
+        total += res.stats[5].base_stat;
+        break;
+      case('total'):
+        stat.innerHTML = `<strong>${total}</strong>`;
+        break;
+    }
+  })
+
+  const calcBarWidth = num => {
+    return (num / 255) * 100;
+  }
+
+  const calcTotalBarWidth = num => {
+    return (num / 1530) * 100;
+  }
+
+  innerBarValues.forEach((bar) => {
+    let type = res.types[0].type.name
+    bar.style.backgroundColor = `${data.typeColors[type]}`
+    switch(bar.id) {
+      case('hp-bar'):
+        bar.style.width = `${calcBarWidth(res.stats[0].base_stat)}%`
+        break;
+      case('attack-bar'):
+        bar.style.width = `${calcBarWidth(res.stats[1].base_stat)}%`
+        break;
+      case('defense-bar'):
+        bar.style.width = `${calcBarWidth(res.stats[2].base_stat)}%`
+        break;
+      case('spAttack-bar'):
+        bar.style.width = `${calcBarWidth(res.stats[3].base_stat)}%`
+        break;
+      case('spDefense-bar'):
+        bar.style.width = `${calcBarWidth(res.stats[4].base_stat)}%`
+        break;
+      case('speed-bar'):
+        bar.style.width = `${calcBarWidth(res.stats[5].base_stat)}%`
+        break;
+      case('total-bar'):
+        bar.style.width = `${calcTotalBarWidth(total)}%`
+        break;
+    }
+  })
+}
