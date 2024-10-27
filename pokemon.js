@@ -380,7 +380,10 @@ function populateStats(res) {
         break;
       case('total-bar'):
         bar.style.width = `${calcTotalBarWidth(total)}%`
+        bar.style.backgroundColor = '#303030'
         break;
     }
   })
 }
+
+// Evolutions (thisis gonna be hard to do ngl bro)

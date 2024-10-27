@@ -53,6 +53,11 @@ body {
   overflow-x: hidden
 }
 
+html {
+  width: 100%;
+  overflow-x: hidden;
+}
+
 main {
   display: flex;
   flex-direction: column;
@@ -387,7 +392,6 @@ main {
 
 .stats-container span {
   color: var(--description-color);
-
 }
 
 .stat-bars-box {
@@ -432,4 +436,79 @@ main {
 
 .total-bar {
   background-color: rgb(33, 0, 249);
+}
+
+/*Bottom middle*/
+
+.bottom-middle-container {
+
+  display: flex;
+  height: 380px;
+  border-radius: 20px;
+  flex-direction: column;
+  animation: slideInFromRight 0.7s;
+  width: 400px;
+  justify-content: center;
+  row-gap: 20px;
+}
+
+/*Evolutions*/
+
+.evolution-container {
+  padding: 0 20px;
+  width: 360px;
+  background-color: var(--box-color);
+  height: 170px;
+  border-radius: 20px;
+  box-shadow: rgba(100, 100, 111, 0.25) 0px 1px 19px 0px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  text-align: left;
+  flex-direction: column;
+}
+
+.evolution-container span {
+  color: var(--description-color);
+}
+
+.evolution-line-box {
+  height: 62.5%;
+  display: flex;
+}
+
+.na-box {
+  width: 100%;
+  font-size: 32px;
+  color: #353535;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/**/
+
+.bm-bottom-container{
+  width: 100%;
+  height: 210px;
+  border-radius: 20px;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.egg-group-container {
+  width: 47%;
+  background-color: var(--box-color);
+  height: 100%;
+  border-radius: 20px;
+  box-shadow: rgba(100, 100, 111, 0.34) 0px 7px 29px 0px;
+}
+
+.gender-container {
+  width: 47%;
+  background-color: var(--box-color);
+  height: 100%;
+  border-radius: 20px;
+  box-shadow: rgba(100, 100, 111, 0.35) 0px 7px 29px 0px;
 }
