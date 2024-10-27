@@ -386,4 +386,4 @@ function populateStats(res) {
   })
 }
 
-// Evolutions (thisis gonna be hard to do ngl bro)
+// Evolutions (this is gonna be hard to do ngl bro)
