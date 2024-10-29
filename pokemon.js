@@ -11,9 +11,57 @@ async function fetchPokemonInfo() {
   const response = await mainData.json();
   const speciesResponse = await speciesData.json();
 
-  // console.log(response.types[0].type.name)
+  // Evolution Line
+
+  const evolutionData = await fetch(speciesResponse.evolution_chain.url)
+  const evolutionResponse = await evolutionData.json();
+
+
+  // first evolution  
+  const firstInLineData = await fetch(evolutionResponse.chain.species.url)
+  const firstInLineResponse = await firstInLineData.json()
+  const firstInLineName = utils.capitalizeFirstLetter(firstInLineResponse.name)
+
+  // second evolution
+  let secondInLineName = '';
+  let thirdInLineName = '';
+
+  if (evolutionResponse.chain.evolves_to.length > 0) {
+    const secondInLineData = await fetch(evolutionResponse.chain.evolves_to[0].species.url)
+    const secondInLineResponse = await secondInLineData.json()
+    secondInLineName = utils.capitalizeFirstLetter(secondInLineResponse.name)
+
+    // third evolution
+    if (evolutionResponse.chain.evolves_to[0].evolves_to.length > 0) {    
+      const thirdInLineData = await fetch(evolutionResponse.chain.evolves_to[0].evolves_to[0].species.url);
+      const thirdInLineResponse = await thirdInLineData.json();
+      thirdInLineName = utils.capitalizeFirstLetter(thirdInLineResponse.name);
+    }
+  }
+
 
   
+  if (evolutionResponse.chain.evolves_to.length > 0) {
+    if (evolutionResponse.chain.evolves_to[0].evolves_to.length > 0) {
+      const thirdInLineData = await fetch(evolutionResponse.chain.evolves_to[0].evolves_to[0].species.url);
+      const thirdInLineResponse = await thirdInLineData.json();
+      thirdInLineName = utils.capitalizeFirstLetter(thirdInLineResponse.name);
+    }
+  }
+
+
+  const evoElem = document.querySelector('.evolution-line-box') 
+
+  if (evolutionResponse.chain.evolves_to.length === 0) {
+    evoElem.innerHTML = ` <div class="na-box">N/A</div>`
+  } else {
+    evoElem.innerHTML = `
+      First: ${firstInLineName}<br>
+      Second: ${secondInLineName}<br>
+      Third: ${thirdInLineName}
+
+    `;
+  }
 
   // flavor text (descriptions)
 
@@ -206,7 +254,7 @@ function flavorText(array) {
     interval = setInterval (() => {
       currentIndex = (currentIndex + 1) % array.length
       loadNewText(currentIndex)
-    }, 5000)
+    }, 4700)
   }
   
   textSpans.forEach((span, index) => {
@@ -387,3 +435,8 @@ function populateStats(res) {
 }
 
 // Evolutions (this is gonna be hard to do ngl bro)
+
+
+function populateEvolutionLine() {
+  return;
+}

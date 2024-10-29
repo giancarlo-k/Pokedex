@@ -458,7 +458,7 @@ main {
   padding: 0 20px;
   width: 360px;
   background-color: var(--box-color);
-  height: 170px;
+  height: 190px;
   border-radius: 20px;
   box-shadow: rgba(100, 100, 111, 0.25) 0px 1px 19px 0px;
   position: relative;
@@ -475,6 +475,7 @@ main {
 .evolution-line-box {
   height: 62.5%;
   display: flex;
+  border: 2px solid red;
 }
 
 .na-box {
@@ -490,7 +491,7 @@ main {
 
 .bm-bottom-container{
   width: 100%;
-  height: 210px;
+  height: 190px;
   border-radius: 20px;
 
   display: flex;
