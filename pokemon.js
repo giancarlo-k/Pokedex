@@ -15,7 +15,9 @@ async function fetchPokemonInfo() {
   // gender_rate - The chance of this Pokémon being female, in eighths; or -1 for genderless.
 
   //leveling
-  const growthRateURL = speciesResponse.growth_rate.url
+  const growthRateURL = speciesResponse.growth_rate.url;
+  const growthRateData = await fetch(growthRateURL);
+  const growthRateResponse = await growthRateData.json();
 
   growthRateElem.innerHTML = utils.fixDashedStrings(speciesResponse.growth_rate.name)
   
@@ -24,6 +26,10 @@ async function fetchPokemonInfo() {
   } else if (speciesResponse.growth_rate.name === 'slow-then-very-fast') {
     growthRateElem.innerHTML = 'Slow Then Fast';
   }
+
+  const totalXpAmt = growthRateResponse.levels[99].experience
+
+  totalXpElem.innerHTML = `${totalXpAmt.toLocaleString()}`
 
   // Evolution Line
   
