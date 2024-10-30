@@ -11,26 +11,6 @@ async function fetchPokemonInfo() {
   const response = await mainData.json();
   const speciesResponse = await speciesData.json();
 
-  //gender
-  // gender_rate - The chance of this Pokémon being female, in eighths; or -1 for genderless.
-
-  //leveling
-  const growthRateURL = speciesResponse.growth_rate.url;
-  const growthRateData = await fetch(growthRateURL);
-  const growthRateResponse = await growthRateData.json();
-
-  growthRateElem.innerHTML = utils.fixDashedStrings(speciesResponse.growth_rate.name)
-  
-  if (speciesResponse.growth_rate.name === 'fast-then-very-slow') {
-    growthRateElem.innerHTML = 'Fast Then Slow';
-  } else if (speciesResponse.growth_rate.name === 'slow-then-very-fast') {
-    growthRateElem.innerHTML = 'Slow Then Fast';
-  }
-
-  const totalXpAmt = growthRateResponse.levels[99].experience
-
-  totalXpElem.innerHTML = `${totalXpAmt.toLocaleString()}`
-
   // Evolution Line
   
   const evolutionData = await fetch(speciesResponse.evolution_chain.url)
@@ -119,12 +99,16 @@ async function fetchPokemonInfo() {
 
   document.querySelector('.sprite-image').src = spriteURL.official.main;
 
+  // Population
+
   spriteHandling();
   populateBasicInfo(response.name, speciesResponse.generation.name);
   populateMeasurements(response.weight, response.height);
   getAndPopulateTypes(response);
   flavorText(flavorArray);
   populateStats(response);
+  populateGender(speciesResponse);
+  populateLeveling(speciesResponse);
 
 }
 
@@ -453,7 +437,53 @@ function populateEvolutionLine() {
 }
 
 // Leveling
+async function populateLeveling(res) {
+  const growthRateElem = document.querySelector('.growth-rate-box span strong')
+  const totalXpElem = document.querySelector('.total-xp-box span strong')
 
-const growthRateElem = document.querySelector('.growth-rate-box span strong')
-const totalXpElem = document.querySelector('.total-xp-box span strong')
+  const growthRateURL = res.growth_rate.url;
+  const growthRateData = await fetch(growthRateURL);
+  const growthRateResponse = await growthRateData.json();
+
+  growthRateElem.innerHTML = utils.fixDashedStrings(res.growth_rate.name)
+  
+  if (res.growth_rate.name === 'fast-then-very-slow') {
+    growthRateElem.innerHTML = 'Fast Then Slow';
+  } else if (res.growth_rate.name === 'slow-then-very-fast') {
+    growthRateElem.innerHTML = 'Slow Then Fast';
+  }
+
+  const totalXpAmt = growthRateResponse.levels[99].experience
+
+  totalXpElem.innerHTML = `${totalXpAmt.toLocaleString()}`
+
+}
+
+
+// Gender
+function populateGender(res) {
+  const femaleRate = (res.gender_rate / 8) * 100;
+  const maleRate = 100 - femaleRate
+
+  const genderElem = document.querySelector('.gender-info-container');
+
+  if(res.gender_rate === -1) {
+    genderElem.innerHTML = `
+      <div class="genderless">
+        Genderless
+      </div>
+    `;
+  } else {   
+      genderElem.innerHTML = `
+        <div class="gender-stat-box">
+          <img src="images/male.png" width="25">
+          ${maleRate}%
+        </div>
+        <div class="gender-stat-box">
+          <img src="images/female.png" width="25">
+          ${femaleRate}%
+        </div>
+      `;
+  }
+}
 
