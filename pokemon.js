@@ -100,7 +100,6 @@ async function fetchPokemonInfo() {
   document.querySelector('.sprite-image').src = spriteURL.official.main;
 
   // Population
-
   spriteHandling();
   populateBasicInfo(response.name, speciesResponse.generation.name);
   populateMeasurements(response.weight, response.height);
@@ -109,6 +108,7 @@ async function fetchPokemonInfo() {
   populateStats(response);
   populateGender(speciesResponse);
   populateLeveling(speciesResponse);
+  populateMisc(speciesResponse)
 
 }
 
@@ -487,3 +487,43 @@ function populateGender(res) {
   }
 }
 
+// Misc.
+
+function populateMisc(res) {
+  const habitatElem = document.querySelector('.habitat');
+  const captureRateElem = document.querySelector('.capture-rate');
+  const baseHappinessElem = document.querySelector('.base-happiness');
+  const eggGroupElem = document.querySelector('.egg-group');
+
+  let habitatName = 'N/A';
+
+  if (res.habitat) {
+    habitatName = utils.fixDashedStrings(res.habitat.name);
+  }
+
+  console.log(res.egg_groups.length)
+
+  const eggGroupsArray = res.egg_groups;
+
+
+  let eggGroupNames = [];
+
+  if (eggGroupsArray.length == 0) {
+    eggGroupElem.innerHTML = 'N/A';
+  } else {
+    eggGroupsArray.forEach((group) => {
+      const eggGroupName = utils.fixDashedStrings(group.name);
+      eggGroupNames.push(eggGroupName);
+    })
+
+    if (eggGroupsArray.length > 1) {
+      eggGroupElem.parentElement.querySelector('div:first-of-type').innerHTML = 'Egg Groups';
+    }
+
+    eggGroupElem.innerHTML = eggGroupNames.join(' & ');
+  }
+
+  habitatElem.innerHTML = habitatName;
+  captureRateElem.innerHTML = `${parseFloat(((res.capture_rate / 255) * 100).toFixed(2))}%`
+  baseHappinessElem.innerHTML = `${parseFloat(((res.base_happiness / 255) * 100).toFixed(2))}%`
+}

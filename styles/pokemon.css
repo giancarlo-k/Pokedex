@@ -475,7 +475,7 @@ main {
 .evolution-line-box {
   height: 62.5%;
   display: flex;
-  border: 2px solid red;
+
 }
 
 .na-box {
@@ -497,12 +497,12 @@ main {
   justify-content: space-between;
 }
 
-.egg-group-container {
+.misc-container {
   width: 45%;
   background-color: var(--box-color);
   height: 100%;
   border-radius: 20px;
-  box-shadow: rgba(100, 100, 111, 0.34) 0px 7px 29px 0px;
+  box-shadow: rgba(100, 100, 111, 0.44) 0px 7px 29px 0px;
 }
 
 .bmb-right-container{
@@ -570,4 +570,40 @@ main {
   color: #353535;
   font-size: 18px;
   margin-bottom: 20px;
+}
+
+/*Misc.*/
+
+.misc-container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.misc-container span {
+  color: var(--description-color);
+  margin-left: 12px;
+  margin-top: 12px;
+  font-size: 14px;
+}
+
+.misc-info-container {
+  margin-left: 12px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 6.5px;
+}
+
+.misc-entry-name {
+  font-weight: 500;
+  font-size: 13px;
+  margin-bottom: 3px;
+}
+
+.misc-entry-description {
+  font-size: 12px;
+}
+
+.misc-entry-box {
+  width: 150px;
 }
