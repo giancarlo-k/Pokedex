@@ -473,9 +473,39 @@ main {
 }
 
 .evolution-line-box {
-  height: 62.5%;
   display: flex;
+  margin-top: 10px;
+  align-self: center;
+  height: 62.5%;
+  width: 85%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
 
+.evolution-pokemon-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 7x;
+  width: 80px;
+} 
+
+.evolution-pokemon-box div {
+  font-size: 13px;
+}
+
+.level-up-trigger-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 4px;
+}
+
+.level-up-trigger-box span {
+  color: black;
+  font-size: 13px;
 }
 
 .na-box {
@@ -486,6 +516,15 @@ main {
   align-items: center;
   justify-content: center;
 }
+
+
+
+
+
+
+
+
+
 
 /*Bottom Middle Section*/
 

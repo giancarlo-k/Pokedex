@@ -11,10 +11,47 @@ async function fetchPokemonInfo() {
   const response = await mainData.json();
   const speciesResponse = await speciesData.json();
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   // Evolution Line
+
+  // TRIGGERS
+  // https://pokeapi.co/api/v2/evolution-trigger/1/ - Level Up
+  // https://pokeapi.co/api/v2/evolution-trigger/2/ - Trade
+  // https://pokeapi.co/api/v2/evolution-trigger/3/ - Use Item
+  // https://pokeapi.co/api/v2/evolution-trigger/4/ - Shed
+  // https://pokeapi.co/api/v2/evolution-trigger/5/ - Spin
+  // https://pokeapi.co/api/v2/evolution-trigger/6/ - Tower of Darkness
+  // https://pokeapi.co/api/v2/evolution-trigger/7/ - Tower of Waters
+  // https://pokeapi.co/api/v2/evolution-trigger/8/ - 3 Critical Hits
+  // https://pokeapi.co/api/v2/evolution-trigger/9/ - Take Damage
+  // https://pokeapi.co/api/v2/evolution-trigger/10/ - Other (Just put arrows ngl, later on do the specifics)
+  // https://pokeapi.co/api/v2/evolution-trigger/11/ - Agile Style Move
+  // https://pokeapi.co/api/v2/evolution-trigger/12/ - Strong Style Move
+  // https://pokeapi.co/api/v2/evolution-trigger/13/ - Recoil Damager
+  // https://pokeapi.co/api/v2/evolution-trigger/14/ - Agile Style Move
+
   
   const evolutionData = await fetch(speciesResponse.evolution_chain.url)
   const evolutionResponse = await evolutionData.json();
+
+  console.log(evolutionResponse)
+
+
 
   // console.log(evolutionResponse.chain.evolves_to[0].evolution_details[0])
 
@@ -24,35 +61,121 @@ async function fetchPokemonInfo() {
   const firstInLineData = await fetch(evolutionResponse.chain.species.url)
   const firstInLineResponse = await firstInLineData.json()
   const firstInLineName = utils.capitalizeFirstLetter(firstInLineResponse.name)
+  const firstInLineId = firstInLineResponse.id;
+
+  // console.log(firstInLineResponse)
+
+  
 
   // second evolution
   let secondInLineName = '';
+  let secondInLineId = '';
   let thirdInLineName = '';
+  let thirdInLineId = '';
 
-  if (evolutionResponse.chain.evolves_to.length > 0) {
+  if (evolutionResponse.chain.evolves_to.length > 0 && id !== 489 && id !== 490) {
     const secondInLineData = await fetch(evolutionResponse.chain.evolves_to[0].species.url)
     const secondInLineResponse = await secondInLineData.json()
     secondInLineName = utils.capitalizeFirstLetter(secondInLineResponse.name)
+    secondInLineId = secondInLineResponse.id;
 
-    evoElem.innerHTML = `
-      ${firstInLineName}<br>
-      ${secondInLineName}
-    `;
 
-    // third evolution
-    if (evolutionResponse.chain.evolves_to[0].evolves_to.length > 0) {    
-      const thirdInLineData = await fetch(evolutionResponse.chain.evolves_to[0].evolves_to[0].species.url);
-      const thirdInLineResponse = await thirdInLineData.json();
-      thirdInLineName = utils.capitalizeFirstLetter(thirdInLineResponse.name);
-      evoElem.innerHTML = `
-        ${firstInLineName}<br>
-        ${secondInLineName}<br>
-        ${thirdInLineName}<br>
-      `;
+
+
+
+    const evolutionTriggerName = evolutionResponse.chain.evolves_to[0].evolution_details[0].trigger.name;
+    const evolutionTriggerPrefix = evolutionResponse.chain.evolves_to[0].evolution_details[0];
+
+    switch (evolutionTriggerName) {
+      case('level-up'):
+        const firstLevelBenchmark = evolutionTriggerPrefix.min_level;
+        // console.log(firstLevelBenchmark)
+
+        evoElem.innerHTML = `
+          <div class='evolution-pokemon-box'>
+            <img width="50" src="https://raw.githubusercontent.com/PokeAPI/sprites/refs/heads/master/sprites/pokemon/other/official-artwork/${firstInLineId}.png">
+            <div>${firstInLineName}</div>
+          </div>
+
+          <div class='level-up-trigger-box'>
+            <span>Lv. ${firstLevelBenchmark}</span>
+            <img width="30" src="images/arrow-right-solid.svg">
+          </div>
+
+          <div class='evolution-pokemon-box'>
+            <img width="50" src="https://raw.githubusercontent.com/PokeAPI/sprites/refs/heads/master/sprites/pokemon/other/official-artwork/${secondInLineId}.png">
+            <div>${secondInLineName}<div>
+          </div>
+        `;
+
+
+        if (
+          !evolutionTriggerPrefix.min_level && evolutionTriggerPrefix.known_move
+        ) {
+          document.querySelector('.level-up-trigger-box span').innerHTML = `Know ${utils.fixDashedStrings(evolutionTriggerPrefix.known_move.name)}`
+        } else if (evolutionTriggerPrefix.min_happiness) {
+          // Happiness
+          document.querySelector('.level-up-trigger-box span').innerHTML = 
+            `${evolutionTriggerPrefix.min_happiness} Happiness`
+        } else if (evolutionTriggerPrefix.party_species) {
+          // Specific Pokémon in party
+          document.querySelector('.level-up-trigger-box span').innerHTML = 
+            `${utils.fixDashedStrings(evolutionTriggerPrefix.party_species.name)} in Party`
+        } else if (evolutionTriggerPrefix.held_item) {
+          // Held Item
+          document.querySelector('.level-up-trigger-box span').innerHTML = 
+            `Holding ${utils.fixDashedStrings(evolutionTriggerPrefix.held_item.name)}`
+        } else if (evolutionTriggerPrefix.location) {
+            // Location
+            document.querySelector('.level-up-trigger-box span').innerHTML = 
+            `At ${utils.fixDashedStrings(evolutionTriggerPrefix.location.name)}`
+        }
+
+
+
+
+        // 3 pokemon
+        if (evolutionResponse.chain.evolves_to[0].evolves_to.length > 0) {
+          const secondLevelBenchmark = evolutionResponse.chain.evolves_to[0].evolves_to[0].evolution_details[0].min_level;
+          // console.log(secondLevelBenchmark)
+
+            const thirdInLineData = await fetch(evolutionResponse.chain.evolves_to[0].evolves_to[0].species.url);
+            const thirdInLineResponse = await thirdInLineData.json();
+            thirdInLineName = utils.capitalizeFirstLetter(thirdInLineResponse.name);
+
+            evoElem.innerHTML = `
+            ${firstInLineName}<br>
+            ${secondInLineName}<br>
+            ${thirdInLineName}
+          `;
+
+
+          
+        break;
+        }
+      default:
+        
     }
-  } else {
+  }
+   else {
     evoElem.innerHTML = ` <div class="na-box">N/A</div>`
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   // flavor text (descriptions)
@@ -436,6 +559,10 @@ function populateEvolutionLine() {
   return;
 }
 
+function levelUpEvolution() {
+  return;
+}
+
 // Leveling
 async function populateLeveling(res) {
   const growthRateElem = document.querySelector('.growth-rate-box span strong')
@@ -458,7 +585,6 @@ async function populateLeveling(res) {
   totalXpElem.innerHTML = `${totalXpAmt.toLocaleString()}`
 
 }
-
 
 // Gender
 function populateGender(res) {
@@ -500,8 +626,6 @@ function populateMisc(res) {
   if (res.habitat) {
     habitatName = utils.fixDashedStrings(res.habitat.name);
   }
-
-  console.log(res.egg_groups.length)
 
   const eggGroupsArray = res.egg_groups;
 
