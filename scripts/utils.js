@@ -46,3 +46,42 @@ export const fixDashedStrings = str => {
     .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
     .join(' ');
 }
+
+export function eeveeEvo(id) {
+
+  const doubleEvoTriggerElem = document.querySelector('.level-up-trigger-box span');
+  if (id === 133) {
+    // Eeveelutions
+    document.querySelector('.second img').src = 'images/question.png'
+    document.querySelector('.second div').innerHTML = 'Multiple'    
+    doubleEvoTriggerElem.innerHTML = ''
+  } else if (id === 135) {
+    document.querySelector('.second img').src = 'https://raw.githubusercontent.com/PokeAPI/sprites/refs/heads/master/sprites/pokemon/other/official-artwork/135.png'
+    document.querySelector('.second div').innerHTML = 'Jolteon'    
+    doubleEvoTriggerElem.innerHTML = 'Thunder Stone'
+  } else if (id === 136) {
+    document.querySelector('.second img').src = 'https://raw.githubusercontent.com/PokeAPI/sprites/refs/heads/master/sprites/pokemon/other/official-artwork/136.png'
+    document.querySelector('.second div').innerHTML = 'Flareon'    
+    doubleEvoTriggerElem.innerHTML = 'Fire Stone'
+  } else if (id === 196) {
+    document.querySelector('.second img').src = 'https://raw.githubusercontent.com/PokeAPI/sprites/refs/heads/master/sprites/pokemon/other/official-artwork/196.png'
+    document.querySelector('.second div').innerHTML = 'Espeon'    
+    doubleEvoTriggerElem.innerHTML = 'Sun Stone'
+  } else if (id === 197) {
+    document.querySelector('.second img').src = 'https://raw.githubusercontent.com/PokeAPI/sprites/refs/heads/master/sprites/pokemon/other/official-artwork/197.png'
+    document.querySelector('.second div').innerHTML = 'Umbreon'    
+    doubleEvoTriggerElem.innerHTML = 'Moon Stone'
+  } else if (id === 470) {
+    document.querySelector('.second img').src = 'https://raw.githubusercontent.com/PokeAPI/sprites/refs/heads/master/sprites/pokemon/other/official-artwork/470.png'
+    document.querySelector('.second div').innerHTML = 'Leafeon'    
+    doubleEvoTriggerElem.innerHTML = 'Leaf Stone'
+  } else if (id === 471) {
+    document.querySelector('.second img').src = 'https://raw.githubusercontent.com/PokeAPI/sprites/refs/heads/master/sprites/pokemon/other/official-artwork/471.png'
+    document.querySelector('.second div').innerHTML = 'Glaceon'    
+    doubleEvoTriggerElem.innerHTML = 'Ice Stone'
+  } else if (id === 700) {
+    document.querySelector('.second img').src = 'https://raw.githubusercontent.com/PokeAPI/sprites/refs/heads/master/sprites/pokemon/other/official-artwork/700.png'
+    document.querySelector('.second div').innerHTML = 'Sylveon'    
+    doubleEvoTriggerElem.innerHTML = 'Shiny Stone'
+  }
+}
