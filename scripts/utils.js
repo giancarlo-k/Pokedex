@@ -55,6 +55,8 @@ export function eeveeEvo(id) {
     document.querySelector('.second img').src = 'images/question.png'
     document.querySelector('.second div').innerHTML = 'Multiple'    
     doubleEvoTriggerElem.innerHTML = ''
+  } else if (id === 134) {
+    doubleEvoTriggerElem.innerHTML = 'Water Stone'
   } else if (id === 135) {
     document.querySelector('.second img').src = 'https://raw.githubusercontent.com/PokeAPI/sprites/refs/heads/master/sprites/pokemon/other/official-artwork/135.png'
     document.querySelector('.second div').innerHTML = 'Jolteon'    

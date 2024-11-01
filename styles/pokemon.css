@@ -460,7 +460,7 @@ main {
   background-color: var(--box-color);
   height: 170px;
   border-radius: 20px;
-  box-shadow: rgba(100, 100, 111, 0.25) 0px 1px 19px 0px;
+  box-shadow: rgba(100, 100, 111, 0.35) 0px 1px 19px 0px;
   position: relative;
   display: flex;
   justify-content: center;
@@ -481,6 +481,7 @@ main {
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
+
 }
 
 .evolution-pokemon-box {
@@ -489,6 +490,7 @@ main {
   align-items: center;
   row-gap: 7x;
   width: 80px;
+  height: 80px;
 } 
 
 .evolution-pokemon-box div {
@@ -503,9 +505,21 @@ main {
   row-gap: 4px;
 }
 
+.evolution-anchor {
+  text-decoration: none;
+  color: black;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.evolution-anchor:hover {
+  text-decoration: underline;
+}
+
 .level-up-trigger-box span {
   color: black;
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .na-box {
@@ -516,15 +530,6 @@ main {
   align-items: center;
   justify-content: center;
 }
-
-
-
-
-
-
-
-
-
 
 /*Bottom Middle Section*/
 

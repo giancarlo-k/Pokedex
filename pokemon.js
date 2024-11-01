@@ -11,174 +11,6 @@ async function fetchPokemonInfo() {
   const response = await mainData.json();
   const speciesResponse = await speciesData.json();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // Evolution Line
-
-  // TRIGGERS
-  // https://pokeapi.co/api/v2/evolution-trigger/1/ - Level Up
-  // https://pokeapi.co/api/v2/evolution-trigger/2/ - Trade
-  // https://pokeapi.co/api/v2/evolution-trigger/3/ - Use Item
-  // for the rest, just put an arrow, no heading
-
-  
-  const evolutionData = await fetch(speciesResponse.evolution_chain.url)
-  const evolutionResponse = await evolutionData.json();
-
-  console.log(evolutionResponse)
-
-
-
-  // console.log(evolutionResponse.chain.evolves_to[0].evolution_details[0])
-
-  const evoElem = document.querySelector('.evolution-line-box') 
-
-  // first evolution  
-  const firstInLineData = await fetch(evolutionResponse.chain.species.url)
-  const firstInLineResponse = await firstInLineData.json()
-  const firstInLineName = utils.capitalizeFirstLetter(firstInLineResponse.name)
-  const firstInLineId = firstInLineResponse.id;
-
-  // console.log(firstInLineResponse)
-
-
-
-  // second evolution
-  let secondInLineName = '';
-  let secondInLineId = '';
-  let thirdInLineName = '';
-  let thirdInLineId = '';
-
-  if (evolutionResponse.chain.evolves_to.length > 0 && id !== 489 && id !== 490) {
-    const secondInLineData = await fetch(evolutionResponse.chain.evolves_to[0].species.url)
-    const secondInLineResponse = await secondInLineData.json()
-    secondInLineName = utils.capitalizeFirstLetter(secondInLineResponse.name)
-    secondInLineId = secondInLineResponse.id;
-
-    const evolutionTriggerName = evolutionResponse.chain.evolves_to[0].evolution_details[0].trigger.name;
-    const evolutionTriggerPrefix = evolutionResponse.chain.evolves_to[0].evolution_details[0];
-
-    if (id === 292) {
-      secondInLineName = 'Shedinja';
-      secondInLineId = 292
-    } 
-
-    evoElem.innerHTML = `
-      <div class='evolution-pokemon-box'>
-        <img width="50" src="https://raw.githubusercontent.com/PokeAPI/sprites/refs/heads/master/sprites/pokemon/other/official-artwork/${firstInLineId}.png">
-        <div>${firstInLineName}</div>
-      </div>
-
-      <div class='level-up-trigger-box'>
-        <span></span>
-        <img width="30" src="images/arrow-right-solid.svg">
-      </div>
-
-      <div class='evolution-pokemon-box second'>
-        <img width="50" src="https://raw.githubusercontent.com/PokeAPI/sprites/refs/heads/master/sprites/pokemon/other/official-artwork/${secondInLineId}.png">
-        <div>${secondInLineName}<div>
-      </div>
-
-    `;
-    const doubleEvoTriggerElem = document.querySelector('.level-up-trigger-box span');
-
-
-
-
-    switch (evolutionTriggerName) {
-      case('level-up'):
-        const firstLevelBenchmark = evolutionTriggerPrefix.min_level;
-        // console.log(firstLevelBenchmark)
-
-        doubleEvoTriggerElem.innerHTML = `Level ${firstLevelBenchmark}`
-
-        if (
-          !evolutionTriggerPrefix.min_level && evolutionTriggerPrefix.known_move
-        ) {
-          doubleEvoTriggerElem.innerHTML = `Know ${utils.fixDashedStrings(evolutionTriggerPrefix.known_move.name)}`
-        } else if (evolutionTriggerPrefix.min_happiness) {
-          // Happiness
-          doubleEvoTriggerElem.innerHTML = `${evolutionTriggerPrefix.min_happiness} Happiness`
-        } else if (evolutionTriggerPrefix.party_species) {
-          // Specific Pokémon in party
-          doubleEvoTriggerElem.innerHTML = `${utils.fixDashedStrings(evolutionTriggerPrefix.party_species.name)} in Party`
-        } else if (evolutionTriggerPrefix.held_item) {
-          // Held Item
-          doubleEvoTriggerElem.innerHTML = `Holding ${utils.fixDashedStrings(evolutionTriggerPrefix.held_item.name)}`
-        } else if (evolutionTriggerPrefix.location) {
-            // Location
-            doubleEvoTriggerElem.innerHTML = `At ${utils.fixDashedStrings(evolutionTriggerPrefix.location.name)}`
-        } else if (evolutionTriggerPrefix.min_beauty) {
-          // Beauty
-          doubleEvoTriggerElem.innerHTML = `${evolutionTriggerPrefix.min_beauty} Beauty`
-        }
-
-
-
-
-        // 3 pokemon
-        if (evolutionResponse.chain.evolves_to[0].evolves_to.length > 0) {
-          const secondLevelBenchmark = evolutionResponse.chain.evolves_to[0].evolves_to[0].evolution_details[0].min_level;
-          // console.log(secondLevelBenchmark)
-
-            const thirdInLineData = await fetch(evolutionResponse.chain.evolves_to[0].evolves_to[0].species.url);
-            const thirdInLineResponse = await thirdInLineData.json();
-            thirdInLineName = utils.capitalizeFirstLetter(thirdInLineResponse.name);
-
-            evoElem.innerHTML = `
-            ${firstInLineName}<br>
-            ${secondInLineName}<br>
-            ${thirdInLineName}
-          `;         
-        }
-        break;
-      case('trade'):
-        doubleEvoTriggerElem.innerHTML = 'Trade';
-        break;
-      case('use-item'):
-        doubleEvoTriggerElem.innerHTML = `${utils.fixDashedStrings(evolutionTriggerPrefix.item.name)}`
-      default:
-         doubleEvoTriggerElem.innerHTML = ''
-    }
-
-    utils.eeveeEvo(id)
-
-  } 
-   else {
-    evoElem.innerHTML = ` <div class="na-box">N/A</div>`
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   // flavor text (descriptions)
 
   const flavorObject = speciesResponse.flavor_text_entries
@@ -232,7 +64,8 @@ async function fetchPokemonInfo() {
   populateStats(response);
   populateGender(speciesResponse);
   populateLeveling(speciesResponse);
-  populateMisc(speciesResponse)
+  populateMisc(speciesResponse);
+  populateEvolutionLine(speciesResponse);
 
 }
 
@@ -556,12 +389,216 @@ function populateStats(res) {
 
 // Evolutions (this is gonna be hard to do ngl bro)
 
-function populateEvolutionLine() {
-  return;
-}
+async function populateEvolutionLine(res) {
+  const evolutionData = await fetch(res.evolution_chain.url)
+  const evolutionResponse = await evolutionData.json();
 
-function levelUpEvolution() {
-  return;
+  const evoElem = document.querySelector('.evolution-line-box') 
+
+  // first evolution  
+  const firstInLineData = await fetch(evolutionResponse.chain.species.url)
+  const firstInLineResponse = await firstInLineData.json()
+  const firstInLineName = utils.capitalizeFirstLetter(firstInLineResponse.name)
+  const firstInLineId = firstInLineResponse.id;
+
+  const doubleBranchedArray = [182, 199, 368, 475, 478, 792];
+
+  // second evolution
+  let secondInLineName = '';
+  let secondInLineId = '';
+  let thirdInLineName = '';
+  let thirdInLineId = '';
+
+  if (evolutionResponse.chain.evolves_to.length > 0 && id !== 489 && id !== 490 && evolutionResponse.chain.evolves_to[0].evolution_details.length != 0) {
+    let secondInLineData = await fetch(evolutionResponse.chain.evolves_to[0].species.url)
+       
+    if (doubleBranchedArray.includes(id)) {
+      secondInLineData = await fetch(evolutionResponse.chain.evolves_to[1].species.url)
+    }
+    
+    const secondInLineResponse = await secondInLineData.json()
+
+    secondInLineName = utils.capitalizeFirstLetter(secondInLineResponse.name)
+    secondInLineId = secondInLineResponse.id;
+
+    const evolutionTriggerName = evolutionResponse.chain.evolves_to[0].evolution_details[0].trigger.name;
+    const evolutionTriggerPrefix = evolutionResponse.chain.evolves_to[0].evolution_details[0];
+
+    if (id === 292) {
+      secondInLineName = 'Shedinja';
+      secondInLineId = 292
+    } 
+
+    evoElem.innerHTML = `
+      <a class="evolution-anchor" href='./pokemon.html?id=${firstInLineId}'>
+        <div class='evolution-pokemon-box'>
+          <img width="50" src="https://raw.githubusercontent.com/PokeAPI/sprites/refs/heads/master/sprites/pokemon/other/official-artwork/${firstInLineId}.png">
+          <div>${firstInLineName}</div>
+        </div>
+      </a>
+
+      <div class='level-up-trigger-box'>
+        <span></span>
+        <img width="30" src="images/arrow-right-solid.svg">
+      </div>
+
+      <a class="evolution-anchor" href='./pokemon.html?id=${secondInLineId}'>
+        <div class='evolution-pokemon-box second'>
+          <img width="50" src="https://raw.githubusercontent.com/PokeAPI/sprites/refs/heads/master/sprites/pokemon/other/official-artwork/${secondInLineId}.png">
+          <div>${secondInLineName}</div>
+        </div>
+      </a>
+    `;
+
+    const doubleEvoTriggerElem = document.querySelector('.level-up-trigger-box span');
+    const firstLevelBenchmark = evolutionTriggerPrefix.min_level;
+    // console.log(firstLevelBenchmark)
+
+    switch (evolutionTriggerName) {
+      case('level-up'):
+
+        doubleEvoTriggerElem.innerHTML = `Level ${firstLevelBenchmark}`
+
+        if (
+          !evolutionTriggerPrefix.min_level && evolutionTriggerPrefix.known_move
+        ) {
+          doubleEvoTriggerElem.innerHTML = `Know ${utils.fixDashedStrings(evolutionTriggerPrefix.known_move.name)}`
+        } else if (evolutionTriggerPrefix.min_happiness) {
+          // Happiness
+          doubleEvoTriggerElem.innerHTML = `${evolutionTriggerPrefix.min_happiness} Happiness`
+        } else if (evolutionTriggerPrefix.party_species) {
+          // Specific Pokémon in party
+          doubleEvoTriggerElem.innerHTML = `${utils.fixDashedStrings(evolutionTriggerPrefix.party_species.name)} in Party`
+        } else if (evolutionTriggerPrefix.held_item) {
+          // Held Item
+          doubleEvoTriggerElem.innerHTML = `Holding ${utils.fixDashedStrings(evolutionTriggerPrefix.held_item.name)}`
+        } else if (evolutionTriggerPrefix.location) {
+            // Location
+            doubleEvoTriggerElem.innerHTML = `At ${utils.fixDashedStrings(evolutionTriggerPrefix.location.name)}`
+        } else if (evolutionTriggerPrefix.min_beauty) {
+          // Beauty
+          doubleEvoTriggerElem.innerHTML = `${evolutionTriggerPrefix.min_beauty} Beauty`
+        }
+        break;
+      case('trade'):
+        doubleEvoTriggerElem.innerHTML = 'Trade';
+        break;
+      case('use-item'):
+        doubleEvoTriggerElem.innerHTML = `${utils.fixDashedStrings(evolutionTriggerPrefix.item.name)}`;
+        break;
+      default:
+         doubleEvoTriggerElem.innerHTML = '';
+    }
+
+    utils.eeveeEvo(id);
+
+
+    // 3 pokemon 
+    if (evolutionResponse.chain.evolves_to[0].evolves_to.length > 0) {
+      evoElem.style.width = '110%'
+      let secondLevelBenchmark = evolutionResponse.chain.evolves_to[0].evolves_to[0].evolution_details[0].min_level;
+      // console.log(secondLevelBenchmark)
+
+        let thirdInLineURL = '';
+
+        
+
+        if (doubleBranchedArray.includes(id)) {
+          thirdInLineURL = evolutionResponse.chain.evolves_to[0].evolves_to[1].species.url;
+          secondLevelBenchmark = evolutionResponse.chain.evolves_to[0].evolves_to[1].evolution_details[0].min_level;
+        } else {
+          thirdInLineURL = evolutionResponse.chain.evolves_to[0].evolves_to[0].species.url;
+        }
+
+        let thirdInLineData = await fetch(thirdInLineURL);
+        let thirdInLineResponse = await thirdInLineData.json();
+
+        thirdInLineName = utils.capitalizeFirstLetter(thirdInLineResponse.name);
+        thirdInLineId = thirdInLineResponse.id;
+
+        
+
+        evoElem.innerHTML = `
+          <a class="evolution-anchor" href='./pokemon.html?id=${firstInLineId}'>
+            <div class='evolution-pokemon-box'>
+              <img width="50" src="https://raw.githubusercontent.com/PokeAPI/sprites/refs/heads/master/sprites/pokemon/other/official-artwork/${firstInLineId}.png">
+              <div>${utils.fixDashedStrings(firstInLineName)}</div>
+            </div>
+          </a>
+
+          <div class='level-up-trigger-box first-arrow'>
+            <span></span>
+            <img width="30" src="images/arrow-right-solid.svg">
+          </div>
+
+          <a class="evolution-anchor" href='./pokemon.html?id=${secondInLineId}'>
+            <div class='evolution-pokemon-box second'>
+              <img width="50" src="https://raw.githubusercontent.com/PokeAPI/sprites/refs/heads/master/sprites/pokemon/other/official-artwork/${secondInLineId}.png">
+              <div>${secondInLineName}</div>
+            </div>
+          </a>
+
+          <div class='level-up-trigger-box second-arrow'>
+            <span></span>
+            <img width="30" src="images/arrow-right-solid.svg">
+          </div>
+
+          <a class="evolution-anchor" href='./pokemon.html?id=${thirdInLineId}'>
+            <div class='evolution-pokemon-box third'>
+              <img width="50" src="https://raw.githubusercontent.com/PokeAPI/sprites/refs/heads/master/sprites/pokemon/other/official-artwork/${thirdInLineId}.png">
+              <div>${thirdInLineName}</div>
+            </div>
+          </a>
+        `; 
+
+        const tripleFirstEvolutionTriggerElem = document.querySelector('.first-arrow span')
+        const tripleSecondEvolutionTriggerElem = document.querySelector('.second-arrow span')
+        let secondEvolutionTriggerName = evolutionResponse.chain.evolves_to[0].evolves_to[0].evolution_details[0].trigger.name;
+        let secondEvolutionPrefix =  evolutionResponse.chain.evolves_to[0].evolves_to[0].evolution_details[0];
+
+        if (doubleBranchedArray.includes(id)) {
+          secondEvolutionTriggerName = evolutionResponse.chain.evolves_to[0].evolves_to[1].evolution_details[0].trigger.name;
+          secondEvolutionPrefix =  evolutionResponse.chain.evolves_to[0].evolves_to[1].evolution_details[0];
+        }
+
+
+        switch(evolutionTriggerName) {
+          case('level-up'):
+            tripleFirstEvolutionTriggerElem.innerHTML = `Level ${firstLevelBenchmark}`;  
+
+            if (evolutionTriggerPrefix.held_item) {
+              tripleFirstEvolutionTriggerElem.innerHTML = utils.fixDashedStrings(evolutionTriggerPrefix.held_item.name);
+            } else if (evolutionTriggerPrefix.min_happiness) {
+              tripleFirstEvolutionTriggerElem.innerHTML = `${evolutionTriggerPrefix.min_happiness} Happiness`
+           }
+            break;
+          case('trade'):
+          tripleFirstEvolutionTriggerElem.innerHTML = 'Trade';  
+        }
+
+        switch(secondEvolutionTriggerName) {
+          case('level-up'):
+            tripleSecondEvolutionTriggerElem.innerHTML = `Level ${secondLevelBenchmark}`
+
+            if (secondEvolutionPrefix.location) {
+              tripleSecondEvolutionTriggerElem.innerHTML = `At ${utils.fixDashedStrings(secondEvolutionPrefix.location.name)}`
+            } else if (secondEvolutionPrefix.min_happiness) {
+               tripleSecondEvolutionTriggerElem.innerHTML = `${secondEvolutionPrefix.min_happiness} Happiness`
+            } 
+            break;
+          case('trade'):
+            tripleSecondEvolutionTriggerElem.innerHTML = 'Trade';
+            break;
+          case('use-item'):
+          tripleSecondEvolutionTriggerElem.innerHTML = utils.fixDashedStrings(secondEvolutionPrefix.item.name);
+        }
+    }
+
+  } 
+   else {
+    evoElem.innerHTML = ` <div class="na-box">N/A</div>`
+  }
+  
 }
 
 // Leveling

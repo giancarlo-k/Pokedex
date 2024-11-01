@@ -61,7 +61,7 @@ export const typeColors = {
 	rock: '#B6A136',
 	ghost: '#735797',
 	dragon: '#6F35FC',
-	dark: '#705746',
+	dark: '#000000',
 	steel: '#B7B7CE',
 	fairy: '#D685AD',
 };
