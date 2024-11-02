@@ -29,33 +29,33 @@
     <div class="next-previous-box">
 
       <div id="previous" class="previous">
-        <img id="previous" width="25" src="images/arrow-left-solid.svg">
-        <div id="previous" class="previous-id"></div>
+        <img class="next-or-previous-arrow" id="previous" width="25" src="images/arrow-left-solid.svg">
+        <div id="previous" class="previous-id next-or-previous-id"></div>
         <img id="previous" width="30" class="previous-image">
       </div>
 
       <div id="next" class="next">
         <img id="next" width="30" class="next-image">
-        <div id="next" class="next-id"></div>
-        <img id="next" width="25" src="images/arrow-right-solid.svg">
+        <div id="next" class="next-id next-or-previous-id"></div>
+        <img class="next-or-previous-arrow" id="next" width="25" src="images/arrow-right-solid.svg">
       </div>
     </div>
 
     <div class="top-info-container">
 
 
-      <div class="sprite-container">
+      <div class="sprite-container pokemon-info-section">
         <img class="shiny-icon" src="images/empty-sparkling.png">
         <img class="gif-icon" src="images/gif.png">
         <img class="sprite-image">
       </div>
 
-      <div class="basic-info-container">
+      <div class="basic-info-container pokemon-info-section">
 
         
         <div class="basic-box">
           <h1 class="pokemon-name"></h1>
-          <div class="dex-number">#198</div>
+          <div class="dex-number"></div>
           <div class="introduced-text"></div>
           <div class="types-box"></div>
           
@@ -69,9 +69,9 @@
       </div>
 
       <div class="top-right-container">
-        <div class="flavor-text-container">
+        <div class="flavor-text-container pokemon-info-section">
   
-          <div>Description</div>
+          <div class="info-headers">Description</div>
           <div class="flavor-text-box">
             
           </div>
@@ -82,8 +82,8 @@
 
         </div>
 
-        <div class="abilities-container">
-          <span>Abilities</span>
+        <div class="abilities-container pokemon-info-section">
+          <span class="info-headers">Abilities</span>
           <div class="abilities-text-container"></div>
         </div>
       </div>
@@ -91,8 +91,8 @@
 
     <div class="bottom-info-container">
 
-      <div class="moves-container">
-        <span></span>
+      <div class="moves-container pokemon-info-section">
+        <span class="info-headers"></span>
         <table class="moves-info-table">
           <thead>
             <tr>
@@ -111,13 +111,13 @@
       </div>
 
       <div class="bottom-middle-container">
-        <div class="evolution-container">
-          <span>Evolution Line</span>
+        <div class="evolution-container pokemon-info-section">
+          <span class="info-headers">Evolution Line</span>
           <div class="evolution-line-box"></div>
         </div>
         <div class="bm-bottom-container">
-          <div class="misc-container">
-            <span>Miscellaneous</span>
+          <div class="misc-container pokemon-info-section">
+            <span class="info-headers">Miscellaneous</span>
             <div class="misc-info-container">
               <div class="misc-entry-box">
                 <div class="misc-entry-name">Habitat</div>
@@ -139,13 +139,13 @@
           </div>
           <div class="bmb-right-container">
 
-            <div class="gender-container">
-              <span>Gender</span>
+            <div class="gender-container pokemon-info-section">
+              <span class="info-headers">Gender</span>
               <div class="gender-info-container"></div>
             </div>
 
-            <div class="leveling-container">
-              <span>Leveling</span>
+            <div class="leveling-container pokemon-info-section">
+              <span class="info-headers">Leveling</span>
               <div class="leveling-info-container">
                 <div class="growth-rate-box">
                   <span>‣ Growth Rate - <strong></strong></span>
@@ -159,8 +159,8 @@
         </div>
       </div>
 
-      <div class="stats-container">
-        <span>Base Stats</span>
+      <div class="stats-container pokemon-info-section">
+        <span class="info-headers">Base Stats</span>
         <div class="stat-bars-box">
           <div class="bar-box">
             <div class="stat-name-box">

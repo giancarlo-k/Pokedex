@@ -68,9 +68,11 @@ async function fetchPokemonInfo() {
   populateEvolutionLine(speciesResponse);
   populateMoves(response)
 
+
 }
 
 fetchPokemonInfo()
+
 
 const spriteURL = {
   gif: {
@@ -93,17 +95,24 @@ const getAndPopulateTypes =(response) => {
   }
 }
 
-const populateBasicInfo = (name, gen) => {
+async function populateBasicInfo(name, gen) {
   const nameElem = document.querySelector('.pokemon-name');
   const introducedElem = document.querySelector('.introduced-text');
   const genName = utils.fixGenerationName(gen);
+  const languageData = await fetch('./pokemon.json');
+  const languageResponse = await languageData.json();
+  const pokemonNameLanguagePreference = Number(localStorage.getItem('pokemonNameLanguage'));
 
   //fix dashed names
   if (/.+-.+/g.test(name) && !data.dashOutliers.includes(id)) {
     nameElem.innerHTML = utils.fixDashedStrings(name)
+  } else if (Number(localStorage.getItem('pokemonNameLanguage')) != 0) {
+    nameElem.innerHTML = languageResponse[`pokemon_${id}`].names[pokemonNameLanguagePreference];
   } else {
     nameElem.innerHTML = utils.capitalizeFirstLetter(name);    
   }
+
+  
 
   // outliers
   if (id === 122) {
@@ -300,7 +309,7 @@ function populateAbilities(res) {
               <div class="ability-name">
                 ${abilityName}
                 <div class="hidden-ability">
-                  <img style="display: ${abilityObject.is_hidden ? 'flex' : 'none'}" width="20" src="images/hide.png">
+                  <img class="hidden-image" style="display: ${abilityObject.is_hidden ? 'flex' : 'none'}" width="20" src="images/hide.png">
                   <span class="tooltip-text">Hidden Ability</span>
                 </div>
               </div>
@@ -308,7 +317,14 @@ function populateAbilities(res) {
             </div>
           `
           abilityTextBoxElem.innerHTML = abilityHTML
-      })
+          
+          if (darkModePreference === 'true') {
+            document.querySelectorAll('.hidden-ability img').forEach((hidden) => {
+              hidden.style.filter = 'invert(1)'
+            })
+          }
+        })
+
   })
 }
 
@@ -451,6 +467,21 @@ async function populateEvolutionLine(res) {
       </a>
     `;
 
+    if (darkModePreference === 'true') {
+      document.querySelectorAll('.evolution-pokemon-box').forEach((evo) => {
+        evo.style.color = 'white'
+      })
+      document.querySelectorAll('.evolution-anchor').forEach((anchor) => {
+        anchor.style.color = 'white'
+      })
+      document.querySelectorAll('.level-up-trigger-box span').forEach((span) => {
+        span.style.color = 'white'
+      })
+      document.querySelectorAll('.level-up-trigger-box img').forEach((arrow) => {
+        arrow.style.filter = 'invert(1)'
+      })
+    } 
+
     const doubleEvoTriggerElem = document.querySelector('.level-up-trigger-box span');
     const firstLevelBenchmark = evolutionTriggerPrefix.min_level;
     // console.log(firstLevelBenchmark)
@@ -552,6 +583,21 @@ async function populateEvolutionLine(res) {
           </a>
         `; 
 
+        if (darkModePreference === 'true') {
+          document.querySelectorAll('.evolution-pokemon-box').forEach((evo) => {
+            evo.style.color = 'white'
+          })
+          document.querySelectorAll('.evolution-anchor').forEach((anchor) => {
+            anchor.style.color = 'white'
+          })
+          document.querySelectorAll('.level-up-trigger-box span').forEach((span) => {
+            span.style.color = 'white'
+          })
+          document.querySelectorAll('.level-up-trigger-box img').forEach((arrow) => {
+            arrow.style.filter = 'invert(1)'
+          })
+        } 
+
         const tripleFirstEvolutionTriggerElem = document.querySelector('.first-arrow span')
         const tripleSecondEvolutionTriggerElem = document.querySelector('.second-arrow span')
         let secondEvolutionTriggerName = evolutionResponse.chain.evolves_to[0].evolves_to[0].evolution_details[0].trigger.name;
@@ -599,6 +645,8 @@ async function populateEvolutionLine(res) {
    else {
     evoElem.innerHTML = ` <div class="na-box">N/A</div>`
   }
+
+  
   
 }
 
@@ -649,6 +697,12 @@ function populateGender(res) {
           ${femaleRate}%
         </div>
       `;
+  }
+  
+  if (darkModePreference === 'true') {
+    document.querySelectorAll('.gender-stat-box').forEach((gender) => {
+      gender.style.color = 'white'
+    })
   }
 }
 
@@ -741,3 +795,60 @@ function populateMoves(res) {
 
   fetchMoves(res)
 }
+
+// Dark Mode 
+// Hardcoding it because it seems easier
+const darkModePreference = localStorage.getItem('darkMode');
+
+const infoSections = document.querySelectorAll('.pokemon-info-section')
+const infoSectionHeaders = document.querySelectorAll('.info-headers');
+const navbar = document.querySelector('.navbar');
+const footerAnchor = document.querySelectorAll('footer div a');
+
+if (darkModePreference === 'true') {
+  document.querySelector('body').style.background = '#171D25';
+  document.querySelector('*').style.color = 'white';
+  infoSections.forEach((section) => {
+    section.style.background = '#171D25';
+    section.style.boxShadow = 'rgba(3, 3, 3, 0.44) 0px 7px 29px 0px';
+  });
+  infoSectionHeaders.forEach((header) => {
+    header.style.color = 'white';
+  })
+  document.querySelectorAll('.stat-name-box span').forEach((span) => {
+    span.style.color = 'white';
+  })
+  document.querySelectorAll('.leveling-info-container div span').forEach((span) => {
+    span.style.color = 'white';
+  })
+  document.querySelectorAll('.measurement-box div').forEach((div) => {
+    div.style.color = 'white'
+  })
+  document.querySelector('.dex-number').style.color = 'white';
+  document.querySelector('.introduced-text').style.color = 'white';
+  Object.assign(document.querySelector('.next').style, {
+    backgroundColor: '#171D25',
+    boxShadow: 'rgba(3, 3, 3, 0.44) 0px 7px 29px 0px'
+  });
+  Object.assign(document.querySelector('.previous').style, {
+    backgroundColor: '#171D25',
+    boxShadow: 'rgba(3, 3, 3, 0.44) 0px 7px 29px 0px'
+  });
+  document.querySelectorAll('.next-or-previous-arrow').forEach((arrow) => {
+    arrow.style.filter = 'invert(1)'
+  })
+  document.querySelectorAll('.next-or-previous-id').forEach((id) => {
+    id.style.color = 'white'
+  })
+  document.querySelector('.shiny-icon').style.filter = 'invert(1)';
+  document.querySelector('.gif-icon').style.filter = 'invert(1)';
+  navbar.style.backgroundColor = '#171D25';
+  footerAnchor.forEach((anchor) => {
+    anchor.style.color = 'white'
+  });
+  document.querySelectorAll('.navbar a').forEach((button) => {
+    button.style.filter = 'invert(100%)';
+  })
+};
+
+// Name Language Settings
