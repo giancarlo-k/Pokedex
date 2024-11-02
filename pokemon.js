@@ -66,6 +66,7 @@ async function fetchPokemonInfo() {
   populateLeveling(speciesResponse);
   populateMisc(speciesResponse);
   populateEvolutionLine(speciesResponse);
+  populateMoves(response)
 
 }
 
@@ -387,8 +388,8 @@ function populateStats(res) {
   })
 }
 
-// Evolutions (this is gonna be hard to do ngl bro)
 
+// Evolutions
 async function populateEvolutionLine(res) {
   const evolutionData = await fetch(res.evolution_chain.url)
   const evolutionResponse = await evolutionData.json();
@@ -652,7 +653,6 @@ function populateGender(res) {
 }
 
 // Misc.
-
 function populateMisc(res) {
   const habitatElem = document.querySelector('.habitat');
   const captureRateElem = document.querySelector('.capture-rate');
@@ -688,4 +688,56 @@ function populateMisc(res) {
   habitatElem.innerHTML = habitatName;
   captureRateElem.innerHTML = `${parseFloat(((res.capture_rate / 255) * 100).toFixed(2))}%`
   baseHappinessElem.innerHTML = `${parseFloat(((res.base_happiness / 255) * 100).toFixed(2))}%`
+}
+
+// Moves
+function populateMoves(res) {
+
+  const movesElem = document.querySelector('.moves-tbody')
+
+  const amountOfMoves = res.moves.length;
+  const amountOfMovesElem = document.querySelector('.moves-container span')
+
+  amountOfMovesElem.innerHTML = `Moves (${amountOfMoves} Total)`
+
+  let movesHTML = '';
+
+  async function fetchMoves(res) {
+    for (const moveObject of res.moves) {
+      const moveData = await fetch(moveObject.move.url);
+      const moveResponse = await moveData.json();
+      
+      const moveName = utils.fixDashedStrings(moveObject.move.name);
+      const moveType = utils.capitalizeFirstLetter(moveResponse.type.name)
+      let movePower = '-'
+      if (moveResponse.power) {
+        movePower = moveResponse.power;
+      };
+      let moveAccuracy = '-';
+      if (moveResponse.accuracy) {
+        moveAccuracy = moveResponse.accuracy;
+      } 
+      const movePP = moveResponse.pp;
+
+
+      movesHTML += `
+        <tr>
+          <th class="name-th">${moveName}</th>
+          <th class="type-th">
+            <div class="move-type-container">
+              <div style="background-color: ${data.typeColors[moveType.toLowerCase()]};" class="move-type-div"></div>
+              ${moveType}
+            </div>
+          </th>
+          <th class="power-th">${movePower}</th>
+          <th class="acc-th">${moveAccuracy}</th>
+          <th class="pp-th">${movePP}</th>
+        </tr>
+      `;
+    }
+
+    movesElem.innerHTML = movesHTML
+  }
+
+  fetchMoves(res)
 }

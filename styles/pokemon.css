@@ -388,6 +388,7 @@ main {
   animation: slideInFromRight 0.9s;
   text-align: left;
   flex-direction: column;
+  row-gap: 10px;
 }
 
 .stats-container span {
@@ -650,4 +651,115 @@ main {
 
 .misc-entry-box {
   width: 150px;
+}
+
+/*Moves*/
+
+.moves-container {
+  width: 310px;
+  height: 380px;
+  position: relative;
+  background-color: var(--box-color);
+  display: flex;
+  padding: 0 20px;
+  justify-content: center;
+  border-radius: 20px;
+  box-shadow: rgba(100, 100, 111, 0.32) 0px 7px 29px 0px;
+  animation: slideInFromLeft 0.7s;
+  flex-direction: column;
+  row-gap: 10px;
+  text-align: left;
+}
+
+.moves-info-table {
+  overflow-y: scroll;
+  height: 300px;
+  border-collapse: collapse;
+  font-size: 14px;
+  min-width: 315px;
+  align-self: center;
+  margin-top: 20px;
+  overflow-y: scroll;
+}
+
+.moves-container span {
+  color: var(--description-color);
+  position: absolute;
+  top: 14px;
+}
+
+tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+tbody tr th {
+  font-weight: normal;
+  border-bottom: 1px solid gray;
+  border-right: 1px solid gray;
+  padding: 3.1px;
+  font-size: 12px;
+  align-items: center;
+  justify-content: center;
+}
+
+
+thead tr th {
+  font-weight: 500;
+  border-bottom: 1px solid gray;
+  padding: 3.1px;
+  border: 1px solid gray;
+} 
+
+tbody {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 280px;
+  display: block;
+  border-bottom: 1px solid gray;
+}
+
+.name-th {
+  border-left: 0;
+  white-space: normal;
+  word-break: break-all;
+  text-align: left;
+  border-left: 1px solid gray;
+}
+
+.type-th,
+.move-type-container {
+  width: 60px;
+  text-align: left;
+}
+
+.power-th {
+  width: 50px;
+  text-align: center;
+}
+
+.acc-th {
+  width: 40px;
+  text-align: center;
+}
+
+.pp-th {
+  width: 40px;
+  text-align: center;
+  border-right: 3px solid gray;
+}
+
+.move-type-div {
+  width: 8px;
+  height: 8px;
+  background-color: #F7D02C;
+  border-radius: 50%;
+  border: 0.6px solid black;
+}
+
+.move-type-container {
+  display: flex;
+  align-items: center;
+  column-gap: 3.5px;
 }
