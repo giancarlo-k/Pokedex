@@ -445,3 +445,18 @@ html {
     right: 5px;
   }
 }
+
+.vanilla-span {
+  color: #444444;
+  font-size: 12px;
+  margin-bottom: 20px;
+  margin-top: -15px;
+}
+
+.vanilla-span a {
+  color: #444444;
+}
+
+.vanilla-span a:hover {
+  color: #0084ff;
+}

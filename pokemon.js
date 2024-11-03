@@ -850,5 +850,3 @@ if (darkModePreference === 'true') {
     button.style.filter = 'invert(100%)';
   })
 };
-
-// Name Language Settings
