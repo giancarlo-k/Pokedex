@@ -331,6 +331,9 @@ function populateAbilities(res) {
 
             anchor.addEventListener('mouseout', () => {
               anchor.querySelector('.ability-name').style.color = 'black'
+              if (darkModePreference === 'true') {
+                 anchor.querySelector('.ability-name').style.color = 'white'
+              }
               anchor.querySelector('.ability-name').style.textDecoration = 'none'
             })
           })
@@ -340,6 +343,9 @@ function populateAbilities(res) {
           if (darkModePreference === 'true') {
             document.querySelectorAll('.hidden-ability img').forEach((hidden) => {
               hidden.style.filter = 'invert(1)'
+              abilityAnchors.forEach((anchor) => {
+                anchor.style.color = 'white'
+              })
             })
           }
         })
