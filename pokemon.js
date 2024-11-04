@@ -297,6 +297,7 @@ function populateAbilities(res) {
     fetch(abilityURL)
       .then((response) => response.json())
       .then((abilityData) => {
+        const abilityID = abilityData.id
         let abilityDescription = ''
         if (abilityData.effect_entries.length === 0) {
           abilityDescription = abilityData.flavor_text_entries.find((entry) => entry.language.name === 'en').flavor_text;
@@ -305,9 +306,10 @@ function populateAbilities(res) {
             (entry) => entry.language.name === 'en').short_effect;          
         }
           abilityHTML += `
+           <a class="ability-anchor" href="./abilities.html#ability-${abilityID}">
             <div class="ability">
               <div class="ability-name">
-                ${abilityName}
+               ${abilityName}
                 <div class="hidden-ability">
                   <img class="hidden-image" style="display: ${abilityObject.is_hidden ? 'flex' : 'none'}" width="20" src="images/hide.png">
                   <span class="tooltip-text">Hidden Ability</span>
@@ -315,8 +317,25 @@ function populateAbilities(res) {
               </div>
               <div class="ability-description">${abilityDescription}</div>
             </div>
+          </a>
           `
           abilityTextBoxElem.innerHTML = abilityHTML
+
+          const abilityAnchors = document.querySelectorAll('.ability-anchor')
+
+          abilityAnchors.forEach((anchor) => {
+            anchor.addEventListener('mouseover', () => {
+              anchor.querySelector('.ability-name').style.color = '#0084ff'
+              anchor.querySelector('.ability-name').style.textDecoration = 'underline'
+            })
+
+            anchor.addEventListener('mouseout', () => {
+              anchor.querySelector('.ability-name').style.color = 'black'
+              anchor.querySelector('.ability-name').style.textDecoration = 'none'
+            })
+          })
+
+
           
           if (darkModePreference === 'true') {
             document.querySelectorAll('.hidden-ability img').forEach((hidden) => {

@@ -331,6 +331,11 @@ main {
   column-gap: 10px;
 }
 
+.ability-anchor {
+  color: black;
+  text-decoration: none;
+}
+
 .abilities-container span{
   color: var(--description-color);  
 }
