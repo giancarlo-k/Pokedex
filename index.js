@@ -174,6 +174,14 @@ export async function fetchAll(region) {
   const darkModePreference = localStorage.getItem('darkMode');
 
   if (darkModePreference === 'true') {
+    document.querySelector('.vanilla-span').style.color = 'white';
+    document.querySelector('.vanilla-span a').style.color = 'white';
+    document.querySelector('.vanilla-span a').addEventListener('mouseover', () => {
+      document.querySelector('.vanilla-span a').style.color = '#0084ff';
+    })
+    document.querySelector('.vanilla-span a').addEventListener('mouseout', () => {
+      document.querySelector('.vanilla-span a').style.color = 'white';
+    })
     cardAnchor.forEach((anchor) => {
       anchor.style.color = 'white'
     });

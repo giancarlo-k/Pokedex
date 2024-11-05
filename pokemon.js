@@ -325,12 +325,12 @@ function populateAbilities(res) {
 
           abilityAnchors.forEach((anchor) => {
             anchor.addEventListener('mouseover', () => {
-              anchor.querySelector('.ability-name').style.color = '#0084ff'
+
               anchor.querySelector('.ability-name').style.textDecoration = 'underline'
             })
 
             anchor.addEventListener('mouseout', () => {
-              anchor.querySelector('.ability-name').style.color = 'black'
+
               if (darkModePreference === 'true') {
                  anchor.querySelector('.ability-name').style.color = 'white'
               }
