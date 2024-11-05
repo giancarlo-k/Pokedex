@@ -152,6 +152,10 @@ h1 {
   margin-right: 5px;
 }
 
+input::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
+
 .clear-search-button {
   width: 17px;
   height: 17px;
@@ -161,7 +165,6 @@ h1 {
   align-items: center;
   justify-content: center;
   color: black;
-  border-radius: 50%;
   position: absolute;
   top: 15px;
   right: 90px;
@@ -184,4 +187,30 @@ h1 {
 
 #ability-searchbar::placeholder {
   color: rgb(75, 75, 75);
+}
+
+/*Responsiveness*/ 
+
+@media only screen and (max-width: 700px) {
+  .generation-ability-container {
+    width: 320px;
+  }
+
+  .search-container {
+    top: 200px;
+    border: none;
+    position:unset
+  }
+
+  .search-container::after {
+    content: '';
+  }
+
+  .clear-search-button {
+    opacity: 0;
+  }
+
+  .generation-index {
+    display: none;
+  }
 }
