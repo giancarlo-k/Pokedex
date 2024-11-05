@@ -40,7 +40,6 @@ h1 {
   left: 120px;
   top: 250px;
   height: 300px;
-
 }
 
 .generation-index::after {
@@ -123,4 +122,66 @@ h1 {
 
 .ability-pokemon-amt span {
   font-weight: 500;
+}
+
+/*Search*/
+
+.search-container {
+  border-top: 2px solid black;
+  position: fixed;
+  left: 120px;
+  bottom: 200px;
+  padding-top: 10px;
+}
+
+.search-container::after {
+  content: 'Search';
+  position: absolute;
+  left: 0;
+  top: -22px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+#ability-searchbar {
+  outline: none;
+  border: none;
+  padding: 7px;
+  border-radius: 5px;
+  width: 145px;
+  margin-right: 5px;
+}
+
+.clear-search-button {
+  width: 17px;
+  height: 17px;
+  position: absolute;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  border-radius: 50%;
+  position: absolute;
+  top: 15px;
+  right: 90px;
+  cursor: pointer;
+}
+
+#ability-search-button {
+  border-radius: 5px;
+  border: none;
+  color: black;
+  background-color: white;
+  padding: 7px;
+  cursor: pointer;
+}
+
+#ability-search-button:hover {
+  background-color: #0084ff;
+  color: white;
+}
+
+#ability-searchbar::placeholder {
+  color: rgb(75, 75, 75);
 }

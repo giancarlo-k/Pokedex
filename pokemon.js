@@ -810,7 +810,7 @@ function populateMoves(res) {
           </th>
           <th class="power-th">${movePower}</th>
           <th class="acc-th">${moveAccuracy}</th>
-          <th class="pp-th">${movePP}</th>
+          <th class="pp-th body-pp-th">${movePP}</th>
         </tr>
       `;
     }

@@ -7,6 +7,8 @@ async function fetchAbilities() {
     const abilityResponse = await fetch(`https://pokeapi.co/api/v2/ability/${i}`)
     const abilityData = await abilityResponse.json()
 
+    // console.log(abilityData)
+
     const pokemonAmt = abilityData.pokemon.length;
     const abilityName = utils.fixDashedStrings(abilityData.name);
     const abilityID = abilityData.id
@@ -49,6 +51,50 @@ function scrollToId() {
   }
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-  fetchAbilities(); 
-});
+  document.addEventListener("DOMContentLoaded", function() {
+    fetchAbilities(); 
+  })
+;
+
+
+// search bar
+const abilitySearchbarElem = document.querySelector('#ability-searchbar');
+const abilitySearchBtn = document.querySelector('#ability-search-button');
+const clearSearchBtn = document.querySelector('.clear-search-button')
+
+abilitySearchbarElem.addEventListener('input', () => {
+  if (abilitySearchbarElem.value) {
+    clearSearchBtn.style.display = 'flex';
+  } else {
+    clearSearchBtn.style.display = 'none';
+  }
+})
+
+clearSearchBtn.addEventListener('click', () => {
+  abilitySearchbarElem.value = '';
+  clearSearchBtn.style.display = 'none';
+})
+
+abilitySearchBtn.addEventListener('click', () => {
+  const targetId = `ability-${abilitySearchbarElem.value.split('-')[0].trim()}`;
+  const targetElement = document.getElementById(targetId);
+  if (targetElement) {
+    targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
+     targetElement.querySelector('.ability-name').style.color = '#0084ff';
+  }
+})
+
+async function populateDatalist() {
+  const response = await fetch('../abilities.json');
+  const data = await response.json();
+  const datalistElem = document.querySelector('#ability-datalist');
+  let datalistHTML = '';
+
+  Object.values(data).forEach((value) => {
+    datalistHTML += `<option value="${value.id} - ${utils.fixDashedStrings(value.name)}"></option>`
+  })
+
+  datalistElem.innerHTML = datalistHTML;
+}
+
+  populateDatalist();
