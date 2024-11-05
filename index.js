@@ -63,21 +63,21 @@ export async function fetchAll(region) {
     allHTML += `
     <a class="card-anchor" href="pokemon.html?id=${i}">     
       <div class="pokemonCard" style="border-color:  ${data_functions.typeColors[type1]}; background-color:  ${data_functions.typeColors[type1]}40;">
-      <img src="../images/pokeball.png" class="caught ${isCaught}">
+      <img src="./images/pokeball.png" class="caught ${isCaught}">
 
-        <div style="display: none" class="icon starter-icon"><img src="../images/starter.png">
+        <div style="display: none" class="icon starter-icon"><img src="./images/starter.png">
           <span class="tooltip-text" >Starter</span>
         </div>
 
-        <div style="display: none" class="icon legendary-icon"><img src="../images/gold-pokeball.png">
+        <div style="display: none" class="icon legendary-icon"><img src="./images/gold-pokeball.png">
           <span class="tooltip-text">Legendary</span>
         </div>
 
-        <div style="display: none" class="icon sub-legendary-icon"><img src="../images/gold-pokeball.png">
+        <div style="display: none" class="icon sub-legendary-icon"><img src="./images/gold-pokeball.png">
           <span class="tooltip-text">Sub-Legendary</span>
         </div>
 
-        <div style="display: none" class="icon mythical-icon"><img src="../images/purple-pokeball.png">
+        <div style="display: none" class="icon mythical-icon"><img src="./images/purple-pokeball.png">
           <span class="tooltip-text">Mythical</span>
         </div>
 
@@ -238,13 +238,13 @@ function checkPokemonCategory(card, id) {
 const githubElem = document.querySelector('.github-icon')
 
 githubElem.addEventListener('mouseover', () => {
-  githubElem.src = '../images/github.gif'
+  githubElem.src = './images/github.gif'
   githubElem.style.width = '42px';
   githubElem.style.marginRight = '-6px'
 })
 
 githubElem.addEventListener('mouseout', () => {
-  githubElem.src = '../images/github.png'
+  githubElem.src = './images/github.png'
   githubElem.style.width = '30px';
   githubElem.style.marginRight = '0px'
 });
