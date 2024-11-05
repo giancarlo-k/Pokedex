@@ -1,6 +1,6 @@
-import  * as data_functions  from './data.js';
-import  * as utils  from './utils.js' 
-import  * as filter  from './filter.js' 
+import  * as data_functions  from './scripts/data.js';
+import  * as utils  from './scripts/utils.js' 
+import  * as filter  from './scripts/filter.js' 
 
 const input = document.getElementById('pokemon-name');
 const pokeballBtn = document.querySelector('.pokeball-button');
