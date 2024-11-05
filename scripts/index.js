@@ -40,7 +40,7 @@ export async function fetchAll(region) {
 
   totalRegionAmountElem.innerHTML = (end - start) + 1
 
-  const response = await fetch('../data/pokemon.json');
+  const response = await fetch('data/pokemon.json');
   const data = await response.json();
 
   for (let i = start; i <= end; i++) {
