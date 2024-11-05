@@ -1,0 +1,5 @@
+Add clear search button on index search 
+Allow users to search for pokemon name on index for phone responsiveness (idk why it doesnt work)
+Add responsiveness to pokemon.html
+Add dark mode to abilities
+Move json files to seperate folder

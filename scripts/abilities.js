@@ -84,17 +84,17 @@ abilitySearchBtn.addEventListener('click', () => {
   }
 })
 
-async function populateDatalist() {
-  const response = await fetch('../abilities.json');
-  const data = await response.json();
-  const datalistElem = document.querySelector('#ability-datalist');
-  let datalistHTML = '';
+// async function populateDatalist() {
+//   const response = await fetch('../data/abilities.json');
+//   const data = await response.json();
+//   const datalistElem = document.querySelector('#ability-datalist');
+//   let datalistHTML = '';
 
-  Object.values(data).forEach((value) => {
-    datalistHTML += `<option value="${value.id} - ${utils.fixDashedStrings(value.name)}"></option>`
-  })
+//   Object.values(data).forEach((value) => {
+//     datalistHTML += `<option value="${value.id} - ${utils.fixDashedStrings(value.name)}"></option>`
+//   })
 
-  datalistElem.innerHTML = datalistHTML;
-}
+//   datalistElem.innerHTML = datalistHTML;
+// }
 
-  populateDatalist();
+  // populateDatalist();
