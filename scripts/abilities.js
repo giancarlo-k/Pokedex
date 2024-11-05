@@ -85,7 +85,7 @@ abilitySearchBtn.addEventListener('click', () => {
 })
 
 async function populateDatalist() {
-  const response = await fetch('../data/abilities.json');
+  const response = await fetch('../abilities.json');
   const data = await response.json();
   const datalistElem = document.querySelector('#ability-datalist');
   let datalistHTML = '';
