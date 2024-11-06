@@ -22,7 +22,7 @@ const saveCaughtState = (id, caught) => {
 };
 
 input.addEventListener('input', (event) => {
-  showPokemonCard(event.target.value);
+  showPokemonCard(event.target.value.toLowerCase());
 });
 
 const pokemonNameLanguagePreference = Number(localStorage.getItem('pokemonNameLanguage'));

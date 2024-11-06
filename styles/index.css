@@ -54,6 +54,7 @@ html {
   padding: 6px 10px 6px 24px;
   justify-content: space-between;
   background: white;
+  position: relative;
 }
 
 .searchbox-container input {
@@ -320,6 +321,40 @@ html {
 }
 
 
+.vanilla-span {
+  color: #444444;
+  font-size: 12px;
+  margin-bottom: 20px;
+  margin-top: -15px;
+}
+
+.vanilla-span a {
+  color: #444444;
+}
+
+.vanilla-span a:hover {
+  color: #0084ff;
+}
+
+/*Clear search*/
+
+.clear-search-button {
+  width: 17px;
+  height: 17px;
+  position: absolute;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  position: absolute;
+  top: 22px;
+  right: 77px;
+  cursor: pointer;
+  margin: auto;
+}
+
+
 
 /*---------------------------------Responsiveness---------------------------------*/
 
@@ -349,9 +384,21 @@ html {
   }
   
   .searchbox-container button {
-    display: none;
+    border: none;
+    background: transparent;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 50%;
+    margin-right: 20px;
   }
-
+  
+  .searchbox-container button img {
+    width: 43.5px;
+  }
   .filter-icon {
     width: 100%;
     height: 5px;
@@ -444,19 +491,13 @@ html {
   .scroll-to-bottom-button {
     right: 5px;
   }
-}
 
-.vanilla-span {
-  color: #444444;
-  font-size: 12px;
-  margin-bottom: 20px;
-  margin-top: -15px;
-}
+  .clear-search-button img {
+    width: 22px;
+  }
 
-.vanilla-span a {
-  color: #444444;
-}
-
-.vanilla-span a:hover {
-  color: #0084ff;
+  .clear-search-button {
+    top: 16.5px;
+    right: 72px;
+  }
 }

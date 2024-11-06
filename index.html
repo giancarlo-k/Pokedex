@@ -43,6 +43,7 @@
 
     <div class="searchbox-container">
       <input style="text-transform: capitalize" spellcheck="false" type="text" id="pokemon-name" placeholder="Enter Pokemon Name or Dex #">
+      <div style="display: none;" class="clear-search-button"><img width="25" src="images/x-mark.png"></div>
       <button title="Random Pokémon!" class="pokeball-button"><img src="images/pokeball.png"></button>
     </div>
 
@@ -155,6 +156,28 @@
     function WIP() {
       alert('Work in progress!')
     }
+
+    const searchbarElem = document.querySelector('.searchbox-container input');
+    const clearSearchBtn = document.querySelector('.clear-search-button')
+
+    searchbarElem.addEventListener('input', () => {
+      if (searchbarElem.value) {
+        clearSearchBtn.style.display = 'flex';
+      } else {
+        clearSearchBtn.style.display = 'none';
+      }
+    })
+
+    clearSearchBtn.addEventListener('click', () => {
+      searchbarElem.value = '';
+      clearSearchBtn.style.display = 'none';
+      const cardElements = document.querySelectorAll('.pokemonCard')
+      
+
+      cardElements.forEach((card) => {
+        card.style.display = 'flex';
+      })
+    })
   </script>
 </body>
 </html>
