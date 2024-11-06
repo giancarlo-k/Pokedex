@@ -1,4 +1,4 @@
-# Pokédex
-A project using Vanilla HTML/CSS/JavaScript
+# <a href="https://giancarlo-k.github.io/pokedex/index.html">Pokédex</a>
 
-<a href="https://giancarlo-k.github.io/pokedex/" target="_blank">Website</a>
+<img src="https://skillicons.dev/icons?i=js,html,css"/>
+
