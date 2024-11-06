@@ -1,5 +1,5 @@
-import  * as data from './scripts/data.js';
-import  * as utils  from './scripts/utils.js' 
+import  * as data from './data.js';
+import  * as utils  from './utils.js' 
 
 
 const params = new URLSearchParams(window.location.search);
