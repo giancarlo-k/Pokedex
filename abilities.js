@@ -1,4 +1,4 @@
-import  * as utils  from './utils.js'; 
+import  * as utils  from './scripts/utils.js'; 
 
 const generationContainers = document.querySelectorAll('.generation-ability-container')
 
@@ -85,7 +85,7 @@ abilitySearchBtn.addEventListener('click', () => {
 })
 
 async function populateDatalist() {
-  const response = await fetch('../abilities.json');
+  const response = await fetch('./abilities.json');
   const data = await response.json();
   const datalistElem = document.querySelector('#ability-datalist');
   let datalistHTML = '';
