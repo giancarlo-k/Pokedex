@@ -53,6 +53,7 @@ function scrollToId() {
 
   document.addEventListener("DOMContentLoaded", function() {
     fetchAbilities(); 
+    populateDatalist()
   })
 ;
 
@@ -97,4 +98,4 @@ async function populateDatalist() {
   datalistElem.innerHTML = datalistHTML;
 }
 
-  populateDatalist();
+populateDatalist();
