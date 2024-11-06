@@ -81,7 +81,7 @@ h1 {
 /*Generations*/
 
 .generation-ability-container {
-  width: 500px;
+  width: 600px;
   font-size: 28px;
   margin-top: 70px;
   scroll-margin-top: 100px;
@@ -191,7 +191,33 @@ input::-webkit-calendar-picker-indicator {
 
 /*Responsiveness*/ 
 
-@media only screen and (max-width: 700px) {
+
+@media only screen and (max-width: 1350px) {
+  .generation-ability-container {
+    width: 820px;
+  }
+
+  .search-container {
+    top: 200px;
+    border: none;
+    position:unset
+  }
+
+  .search-container::after {
+    content: '';
+  }
+
+  .clear-search-button {
+    opacity: 0;
+  }
+
+  .generation-index {
+    display: none;
+  }
+}
+
+
+@media only screen and (max-width: 900px) {
   .generation-ability-container {
     width: 320px;
   }

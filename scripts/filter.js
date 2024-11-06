@@ -1,5 +1,5 @@
 import  * as data_functions  from './data.js';
-import  * as main from '../index.js' 
+import  * as main from './index.js' 
 
 export const filterBtn = document.querySelector('.filter-icon-img');
 const filterBox = document.querySelector('.filters-box');

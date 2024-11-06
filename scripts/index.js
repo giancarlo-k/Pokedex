@@ -1,6 +1,6 @@
-import  * as data_functions  from './scripts/data.js';
-import  * as utils  from './scripts/utils.js' 
-import  * as filter  from './scripts/filter.js' 
+import  * as data_functions  from './data.js';
+import  * as utils  from './utils.js' 
+import  * as filter  from './filter.js' 
 
 const input = document.getElementById('pokemon-name');
 const pokeballBtn = document.querySelector('.pokeball-button');
@@ -40,7 +40,7 @@ export async function fetchAll(region) {
 
   totalRegionAmountElem.innerHTML = (end - start) + 1
 
-  const response = await fetch('./pokemon.json');
+  const response = await fetch('./data/pokemon.json');
   const data = await response.json();
 
   for (let i = start; i <= end; i++) {
