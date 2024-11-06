@@ -72,7 +72,6 @@ main {
 }
 
 .top-info-container {
-
   padding: 0 30px;
   width: 100%;
   height: 380px;
@@ -771,3 +770,5 @@ tbody {
   align-items: center;
   column-gap: 3.5px;
 }
+
+/*Responsiveness*/

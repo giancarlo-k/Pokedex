@@ -239,4 +239,12 @@ input::-webkit-calendar-picker-indicator {
   .generation-index {
     display: none;
   }
+
+  main {
+    margin-top: 60px;
+  }
+
+  .ability {
+    scroll-margin-top: 85px;
+  }
 }

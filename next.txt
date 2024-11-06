@@ -1,2 +1,5 @@
 Add responsiveness to pokemon.html
-Moves page
+Add responsiveness to settings.html
+Moves page completed
+  - Allow users to go from a move on pokemon.html to the move on moves.html
+Items page completed
