@@ -99,3 +99,39 @@ async function populateDatalist() {
 }
 
 populateDatalist();
+
+// Dark mode
+
+const navbar = document.querySelector('.navbar');
+const footerAnchor = document.querySelectorAll('footer div a');
+
+const darkModePreference = localStorage.getItem('darkMode');
+
+console.log(darkModePreference)
+
+if (darkModePreference === 'true') {
+  document.querySelector('body').style.background = '#171D25';
+  document.querySelector('*').style.color = 'white';
+  document.querySelectorAll('.gen-name-underline').forEach((line) => {
+    line.style.backgroundColor = 'white'
+  })
+  document.querySelectorAll('.other').forEach((section) => {
+    section.style.borderTopColor = 'white';
+  })
+  document.querySelectorAll('.generation-index ul li a').forEach((a) => {
+    a.style.color = 'white';
+    a.addEventListener('mouseover', () => {
+      a.style.color = '#0084ff';
+    })
+    a.addEventListener('mouseout', () => {
+       a.style.color = 'white';
+    })
+  })
+  navbar.style.backgroundColor = '#171D25';
+  footerAnchor.forEach((anchor) => {
+    anchor.style.color = 'white'
+  });
+  document.querySelectorAll('.navbar a').forEach((button) => {
+    button.style.filter = 'invert(100%)';
+  })
+}
