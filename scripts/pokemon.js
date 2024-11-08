@@ -99,7 +99,7 @@ async function populateBasicInfo(name, gen) {
   const nameElem = document.querySelector('.pokemon-name');
   const introducedElem = document.querySelector('.introduced-text');
   const genName = utils.fixGenerationName(gen);
-  const languageData = await fetch('./pokemon.json');
+  const languageData = await fetch('../data/pokemon.json');
   const languageResponse = await languageData.json();
   const pokemonNameLanguagePreference = Number(localStorage.getItem('pokemonNameLanguage'));
 

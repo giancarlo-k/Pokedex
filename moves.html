@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no">
-  <title>Pokédex - Abilities</title>
+  <title>Pokédex - Moves</title>
   <link rel="stylesheet" href="styles/moves.css">
   <link rel="stylesheet" href="styles/header-footer.css">
   <link rel="icon" type="image/png" href="images/pokeball.png">
@@ -27,6 +27,28 @@
 
   <main>
     <h1 id="header" class="region-name-title">Moves</h1>
+
+    <div class="search-container">
+      <input spellcheck="false" id="moves-searchbar" list='moves-datalist' placeholder="Aura Sphere..." type="text">
+      <div style="display: none;" class="clear-search-button"><img width="15" src="images/x-mark.png"></div>
+      <button id="moves-search-button">Find Move</button>
+      <datalist id="moves-datalist"></datalist>
+    </div>
+
+    <div style="display: none;" class="wait-loading">
+      Loading Moves.....
+      
+    </div>
+
+    <div class="moves-container">
+      <div id="grass" class="move-type-container">
+        <div class="type-name-underline"></div>
+        Grass 
+
+        <div class="moves-grid-box"></div>
+
+      </div>
+    </div>
     
   </main>
 

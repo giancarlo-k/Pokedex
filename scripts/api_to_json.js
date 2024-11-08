@@ -2,6 +2,7 @@ const fs = require('fs');
 
 const pokemon = {};
 const abilities = {};
+const moves = {};
 
 // async function makeObject() {
 //   for (i = 1; i <= 1025; i++) {
@@ -36,23 +37,45 @@ const abilities = {};
 //   })
 // }
 
+// Abilities
 
+// async function makeObject() {
+//   for (i = 1; i <= 307; i++) {
+//     const response = await fetch(`https://pokeapi.co/api/v2/ability/${i}`);
+//     const data = await response.json();
+
+//     // console.log(data)
+
+
+//     abilities[`ability_${i}`] = {
+//      name: data.name,
+//      id: i
+//     };
+//   }
+
+//   fs.writeFile('./abilities.json', JSON.stringify(abilities, null, 2), (error) => {
+//     if (error) {
+//       console.log(error)
+//     } else {
+//       console.log('Success!')
+//     }
+//   })
+// }
+
+// makeObject()
 
 async function makeObject() {
-  for (i = 1; i <= 307; i++) {
-    const response = await fetch(`https://pokeapi.co/api/v2/ability/${i}`);
+  for (let i = 1; i <= 919; i++) {
+    const response = await fetch(`https://pokeapi.co/api/v2/move/${i}`);
     const data = await response.json();
 
-    // console.log(data)
-
-
-    abilities[`ability_${i}`] = {
+    moves[`move_${i}`] = {
      name: data.name,
      id: i
     };
   }
 
-  fs.writeFile('./abilities.json', JSON.stringify(abilities, null, 2), (error) => {
+  fs.writeFile('./moves.json', JSON.stringify(moves, null, 2), (error) => {
     if (error) {
       console.log(error)
     } else {

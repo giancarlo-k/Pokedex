@@ -27,12 +27,17 @@ async function fetchAbilities() {
       if (gen.id == abilityData.generation.name) {
         abilityHTML = `
           <div id="ability-${abilityID}" class="ability">
-            <div class="ability-name">#${i} - ${abilityName}</div>
+            <div class="ability-name">${abilityName}</div>
             <div class="ability-pokemon-amt">‣ Found in <span>${pokemonAmt}</span> Pokémon</div>
             <div class="ability-description">‣ ${abilityDescription}</div>
           </div>
         `;
         gen.innerHTML += abilityHTML;
+      }
+      if (darkModePreference === 'true') {
+        document.querySelectorAll('.ability').forEach((ability) => {
+          ability.style.boxShadow = 'rgba(3, 3, 3, 0.4) 0px 7px 29px 0px';
+        })
       }
     })
   }
@@ -47,7 +52,8 @@ function scrollToId() {
 
   if (targetElement) {
     targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
-    targetElement.querySelector('.ability-name').style.color = '#0084ff'
+    targetElement.querySelector('.ability-name').style.color = '#0084ff';
+    targetElement.style.border = '2px solid #0084ff';
   }
 }
 
@@ -58,7 +64,7 @@ function scrollToId() {
 ;
 
 
-// search bar
+// search barx
 const abilitySearchbarElem = document.querySelector('#ability-searchbar');
 const abilitySearchBtn = document.querySelector('#ability-search-button');
 const clearSearchBtn = document.querySelector('.clear-search-button')
@@ -82,6 +88,7 @@ abilitySearchBtn.addEventListener('click', () => {
   if (targetElement) {
     targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
      targetElement.querySelector('.ability-name').style.color = '#0084ff';
+     targetElement.style.border = '2px solid #0084ff';
   }
 })
 
@@ -110,6 +117,7 @@ const darkModePreference = localStorage.getItem('darkMode');
 console.log(darkModePreference)
 
 if (darkModePreference === 'true') {
+
   document.querySelector('body').style.background = '#171D25';
   document.querySelector('*').style.color = 'white';
   document.querySelectorAll('.gen-name-underline').forEach((line) => {
@@ -117,15 +125,6 @@ if (darkModePreference === 'true') {
   })
   document.querySelectorAll('.other').forEach((section) => {
     section.style.borderTopColor = 'white';
-  })
-  document.querySelectorAll('.generation-index ul li a').forEach((a) => {
-    a.style.color = 'white';
-    a.addEventListener('mouseover', () => {
-      a.style.color = '#0084ff';
-    })
-    a.addEventListener('mouseout', () => {
-       a.style.color = 'white';
-    })
   })
   navbar.style.backgroundColor = '#171D25';
   footerAnchor.forEach((anchor) => {
