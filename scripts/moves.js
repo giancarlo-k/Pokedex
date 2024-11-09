@@ -30,57 +30,49 @@ function populateMoveContainerSkeletons() {
 async function fetchMoves() {
   populateMoveContainerSkeletons()
   const typeContainers = document.querySelectorAll('.move-type-container')
-  for (let i = 1; i <= 919; i++) {
-    const moveResponse = await fetch(`https://pokeapi.co/api/v2/move/${i}`);
+    const moveResponse = await fetch('./data/moves.json');
     const moveData = await moveResponse.json();
 
     // console.log(moveData)
 
-    const name = utils.fixDashedStrings(moveData.name);
-    const type = moveData.type.name;
-    let power = moveData.power;
-    const pp = moveData.pp;
-    const learnedByAmt = moveData.learned_by_pokemon.length;
-    let description = moveData.flavor_text_entries.find(item => item.language.name == 'en')?.flavor_text;
+    Object.values(moveData).forEach((value) => {
+     const id = value.id;
+     const name = utils.fixDashedStrings(value.name);
+     const gen = utils.fixGenerationName(value.generation)
+     const acc = value.accuracy;
+     const pp = value.pp;
+     const type = value.type;
+     const power = value.power;
+     const learnedByAmt = value.learned;
+     const description = value.description;
 
-
-    if (description === 'Dummy Data' || moveData.flavor_text_entries.length === 0) {
-      description = 'N/A'
-    }
-
-    if (power === null) {
-      power = '-'
-    }
-
-    typeContainers.forEach((container) => {
-      if (container.id === type) {
-        container.querySelector('.moves-grid-box').innerHTML += `
-          <div id="move-${i}" style="border: 2px solid  ${data.typeColors[type]}; background: ${data.typeColors[type]}13" class="moves-text-container">
-            <div class="name-type-box">
-              #${i} - ${name}
-              <img width="35" src="images/types/${type}.png">
-            </div>
-            <span>‣ Introduced in <span class="bolded-span">${utils.fixGenerationName(moveData.generation.name)}</span></span>
-            <span class="learned-box">‣ This move can be learned by <span class="bolded-span">${learnedByAmt}</span> Pokémon.</span>
-
-            <div class="description">‣ ${description}</div>
-            <div class="short-info-box">
-              <div class="power-box short"><span>Power</span>${power}</div>
-              <div class="acc-box short"><span>Accuracy</span>-</div>
-              <div class="pp-box short"><span>PP</span>${pp}</div>
-            </div>
-          </div>
-        `
-      }
-      if (darkModePreference === 'true') {
-        document.querySelectorAll('.moves-text-container').forEach((ability) => {
-          ability.style.boxShadow = 'rgba(3, 3, 3, 0.4) 0px 7px 29px 0px';
-        })
-      }
+     typeContainers.forEach((container) => {
+       if (container.id === type) {
+         container.querySelector('.moves-grid-box').innerHTML += `
+           <div id="move-${id}" style="border: 2px solid  ${data.typeColors[type]}; background: ${data.typeColors[type]}13" class="moves-text-container">
+             <div class="name-type-box">
+               #${id} - ${name}
+               <img width="35" src="images/types/${type}.png">
+             </div>
+             <span>‣ Introduced in <span class="bolded-span">${gen}</span></span>
+             <span class="learned-box">‣ This move can be learned by <span class="bolded-span">${learnedByAmt}</span> Pokémon.</span>
+ 
+             <div class="description">‣ ${description}</div>
+             <div class="short-info-box">
+               <div class="power-box short"><span>Power</span>${power}</div>
+               <div class="acc-box short"><span>Accuracy</span>${acc}</div>
+               <div class="pp-box short"><span>PP</span>${pp}</div>
+             </div>
+           </div>
+         `
+       }
+       if (darkModePreference === 'true') {
+         document.querySelectorAll('.moves-text-container').forEach((ability) => {
+           ability.style.boxShadow = 'rgba(3, 3, 3, 0.4) 0px 7px 29px 0px';
+         })
+       }
+     })
     })
-
-  }
-
   scrollToId();
 }
 

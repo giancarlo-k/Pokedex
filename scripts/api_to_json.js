@@ -69,9 +69,28 @@ async function makeObject() {
     const response = await fetch(`https://pokeapi.co/api/v2/move/${i}`);
     const data = await response.json();
 
+    let power = data.power;
+    let description = data.flavor_text_entries.find(item => item.language.name == 'en')?.flavor_text;
+
+
+    if (description === 'Dummy Data' || data.flavor_text_entries.length === 0) {
+      description = 'N/A'
+    }
+
+    if (power === null) {
+      power = '-'
+    }
+
     moves[`move_${i}`] = {
      name: data.name,
-     id: i
+     id: i,
+     type: data.type.name,
+     generation: data.generation.name,
+     pp: data.pp,
+     accuracy: data.accuracy,
+     learned: data.learned_by_pokemon.length,
+     power,
+     description
     };
   }
 
