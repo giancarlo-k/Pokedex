@@ -337,8 +337,6 @@ function populateAbilities(res) {
               anchor.querySelector('.ability-name').style.textDecoration = 'none'
             })
           })
-
-
           
           if (darkModePreference === 'true') {
             document.querySelectorAll('.hidden-ability img').forEach((hidden) => {
@@ -785,7 +783,10 @@ function populateMoves(res) {
     for (const moveObject of res.moves) {
       const moveData = await fetch(moveObject.move.url);
       const moveResponse = await moveData.json();
-      
+
+      // console.log(moveResponse)
+
+      const moveID = moveResponse.id
       const moveName = utils.fixDashedStrings(moveObject.move.name);
       const moveType = utils.capitalizeFirstLetter(moveResponse.type.name)
       let movePower = '-'
@@ -800,8 +801,8 @@ function populateMoves(res) {
 
 
       movesHTML += `
-        <tr>
-          <th class="name-th">${moveName}</th>
+        <tr class="testing-tr">
+          <th class="name-th"><a class="move-anchor" href="./moves.html#move-${moveID}">${moveName}</a></th>
           <th class="type-th">
             <div class="move-type-container">
               <div style="background-color: ${data.typeColors[moveType.toLowerCase()]};" class="move-type-div"></div>
@@ -816,7 +817,15 @@ function populateMoves(res) {
     }
 
     movesElem.innerHTML = movesHTML
+    const moveAnchors = document.querySelectorAll('.move-anchor')
+  
+    moveAnchors.forEach((anchor) => {
+      if (darkModePreference === 'true') {
+        anchor.style.color = 'white'
+      }
+    })
   }
+
 
   fetchMoves(res)
 }

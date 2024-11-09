@@ -73,12 +73,12 @@ async function fetchMoves() {
        }
      })
     })
-  scrollToId();
 }
 
 async function init() {
   populateMoveContainerSkeletons();
   await fetchMoves();
+  scrollToId()
   await populateDatalist();
   domReady = true;
 }
@@ -88,8 +88,9 @@ function scrollToId() {
   const targetElement = document.getElementById(targetId);
 
   if (targetElement) {
-    targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
-    targetElement.querySelector('.ability-name').style.color = '#0084ff'
+    setTimeout(() => {
+      targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
+    })
   }
 };
 
@@ -102,8 +103,6 @@ const moveSearchBtn = document.querySelector('#moves-search-button');
 const clearSearchBtn = document.querySelector('.clear-search-button')
 
 let domReady = false;
-
-
 
 moveSearchbarElem.addEventListener('input', () => {
   if (moveSearchbarElem.value) {

@@ -771,4 +771,14 @@ tbody {
   column-gap: 3.5px;
 }
 
+.move-anchor {
+  text-decoration: none;
+  color: black;
+}
+
+.move-anchor:hover {
+  text-decoration: underline;
+}
+
 /*Responsiveness*/
+
