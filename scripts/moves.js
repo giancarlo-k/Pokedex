@@ -39,7 +39,7 @@ async function fetchMoves() {
      const id = value.id;
      const name = utils.fixDashedStrings(value.name);
      const gen = utils.fixGenerationName(value.generation)
-     const acc = value.accuracy;
+     const acc = value.accuracy ? value.accuracy : '-';
      const pp = value.pp;
      const type = value.type;
      const power = value.power;
