@@ -1,3 +1,2 @@
 Add responsiveness to pokemon.html
-Moves page completed
-  - Allow users to go from a move on pokemon.html to the move on moves.html
+Add page up buttons on abilities and moves pages
