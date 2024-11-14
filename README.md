@@ -37,7 +37,7 @@
 
 | Desktop | Mobile |
 | --- | --- |
-| ![alt text](/images/screenshots/light-desktop-home.png) |  ![alt text](/images/screenshots/light-mobile-home.jpg) |
+| ![alt text](/images/screenshots/light-desktop-home.png) |  --- |
 | ![alt text](/images/screenshots/light-desktop-pkmn.png) | ![alt text](/images/screenshots/light-mobile-pkmn.jpg) |
 | ![alt text](/images/screenshots/dark-desktop-pkmn.png) | ![alt text](/images/screenshots/dark-mobile-pkmn.jpg) |
 
