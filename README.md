@@ -37,7 +37,7 @@
 
  <h3>Desktop</h3>
 
-| Light Mode | Dark Mode |
+| Desktop | Mobile |
 | --- | --- |
 | bro | bro |
 
