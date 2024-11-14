@@ -1,2 +1,0 @@
-Add responsiveness to pokemon.html
-Add page up buttons on abilities and moves pages
