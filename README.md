@@ -33,7 +33,7 @@
 
 
 
- <h2>Pokédex in Action</h2>
+ <h2>Screenshots</h2>
 
 | Desktop | Mobile |
 | --- | --- |
@@ -41,3 +41,22 @@
 | ![alt text](/images/screenshots/light-desktop-pkmn.png) | ![alt text](/images/screenshots/light-mobile-pkmn.jpg) |
 | ![alt text](/images/screenshots/dark-desktop-pkmn.png) | ![alt text](/images/screenshots/dark-mobile-pkmn.jpg) |
 
+
+ <h2>Skills & Concepts Learned</h2>
+
+This is the first full fledged JavaScript project I've made, I used all my knowledge to create this and picked up new skills along the way. 
+
+These new skills include the following:
+- Fetch API
+- Website Responsiveness
+- Local Storage
+- JSON Manipulation & Application
+- Regular Expressions
+- Problem Solving (A lot of it!)
+
+ <h2>Installation</h2>
+
+1. Download the source code from the repository: https://github.com/giancarlo-k/pokedex
+2. Extract the files from the downloaded ZIP archive.
+3. Open the `index.html` file in your web browser.
+4. Enjoy!!
