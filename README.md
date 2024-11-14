@@ -35,9 +35,9 @@
 
  <h2>Pokédex in Action</h2>
 
- <h3>Desktop</h3>
-
 | Desktop | Mobile |
 | --- | --- |
-| bro | bro |
+| ![alt text](/images/screenshots/light-desktop-home.png) | ![alt text](/images/screenshots/light-mobile-home.png) |
+| ![alt text](/images/screenshots/light-desktop-pkmn.png) | ![alt text](/images/screenshots/light-mobile-pkmn.png) |
+| ![alt text](/images/screenshots/dark-desktop-pkmn.png) | ![alt text](/images/screenshots/dark-mobile-pkmn.png) |
 
