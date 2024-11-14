@@ -444,7 +444,6 @@ main {
 /*Bottom middle*/
 
 .bottom-middle-container {
-
   display: flex;
   height: 380px;
   border-radius: 20px;
@@ -570,7 +569,6 @@ main {
   flex-direction: column;
   row-gap: 7px;
 }
-
 
 .leveling-container span,
 .gender-container span {
@@ -781,7 +779,9 @@ tbody {
 
 /*Responsiveness*/
 
-@media only screen and (max-width: 1300px) {
+
+
+@media only screen and (max-width: 1000px) {
   body {
     height: 2420px;
   }
@@ -913,5 +913,177 @@ tbody {
   .total-xp-box span {
     font-size: 10px;
     color: black;
+  }
+}
+
+@media only screen and (max-width: 1300px) and (min-width: 1001px) {
+  /*Basic info*/
+
+  .basic-info-container {
+    height: 300px;
+    width: 300px;
+  }
+
+  .pokemon-name {
+    font-size: 26px;
+  }
+  
+  .dex-number {
+    margin-top: -10px;
+    margin-bottom: 10px;
+  }
+  
+  /*Types*/
+  
+  .type-image {
+    width: 45px;
+  }
+  
+  /*Measurements*/
+  
+  .measurement-box {
+    margin-top: -10px;
+    flex-direction: row;
+    column-gap: 10px;
+  }
+  
+  .measurement-box div {
+    color: var(--description-color);;
+  }
+  
+  .measurement-box h2 {
+    font-size: 16px;
+  }
+
+  /*Sprites*/
+
+  .sprite-container {
+    width: 300px;
+    height: 300px;
+    padding: 0;
+  }
+
+
+  .shiny-icon,
+  .gif-icon {
+    width: 35px;
+  }
+
+
+  .sprite-image {
+    width: 200px;
+  }
+
+  .top-right-container {
+    order: 3;
+    width: 340px;
+  }
+
+  .abilities-container,
+  .flavor-text-container {
+    width: 310px; 
+  }
+
+  .top-right-container {
+    height: 300px;
+  }
+
+  .flavor-text-container {
+    height: 90px;
+  }
+
+  .flavor-text-box {
+    font-size: 9px;
+  }
+
+  .abilities-container {
+    min-height: 16px;
+  }
+
+  .ability-name {
+    font-size: 12px;
+  }
+
+  .ability-description {
+    font-size: 10px;
+  }
+
+  .abilities-text-container {
+    row-gap: 5px;
+  }
+
+  .bottom-info-container {
+    align-items: center;
+    row-gap: 40px;
+    margin-top: -70px;
+  }
+
+   /*Stats*/
+
+  .stats-container {
+    width: 310px;
+    row-gap: 0px;
+  }
+
+  .stat-name-box {
+    width: 135px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .stat-name-box span {
+    font-size: 14px;
+  }
+
+  /*Bottom middle*/
+
+  .bottom-middle-container {
+    height: 380px;
+    width: 300px;
+    row-gap: 20px;
+  }
+
+  /*Evolutions*/
+
+  .evolution-container {
+    width: 260px;
+    height: 170px;
+  }
+
+  /*Bottom Middle Section*/
+
+  .bm-bottom-container{
+    width: 300px;
+    height: 210px;
+  }
+
+  .growth-rate-box span,
+  .total-xp-box span {
+    font-size: 8px;
+    color: black;
+  }
+
+  .moves-container {
+    width: 270px;
+  }
+
+  .moves-info-table * {
+    font-size: 8px;
+  }
+
+  .moves-info-table {
+    min-width: 270px;
+  }
+
+  .level-up-trigger-box span {
+    font-size: 10px;
+  }
+
+  .level-up-trigger-box img {
+    width: 15px;
+  }
+  
+  .evolution-pokemon-box div {
+    font-size: 10px;
   }
 }
