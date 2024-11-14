@@ -15,29 +15,20 @@
  - Search abilites and moves via ID or Name
  - Jump to ability or move from the Pokémon Info. page
  - Pokémon Info. 
-	 - Basic Info.
-		- Name (Available in 7 languages)
-		- Dex & Generation number
-		- Type(s)
-		- Height & Weight
-		
-	 - Description / Abilities
-		- Up to 7 descriptions across different Game versions
-		- All Pokémon abilities & ability descriptions
-	
-	 - Moves
-		- All moves available to learn
-		- Name, type, power, accuracy & PP
-	
-	 - Statistics
-		- View all stat values out of 255
-		- View Max stat total out of 1530
-	
-	 - Other
-		- Evolution Line & Evolution triggers (ex. Moon Stone)
-		- Gender Ratio
-		- Leveling Growth Rate & Total Exp. points
-		- Habitat, Egg Group, Capture Rate & Base Happiness
+	- Name (Available in 7 languages)
+	- Dex & Generation number
+	- Type(s)
+	- Height & Weight
+	- Up to 7 descriptions across different Game versions
+	- View all Pokémon abilities & ability descriptions
+	- View all moves available to learn
+	- Name, type, power, accuracy & PP
+	- View all stat values out of 255
+	- View Max stat total out of 1530
+	- Evolution Line & Evolution triggers (ex. Moon Stone)
+	- Gender Ratio
+	- Leveling Growth Rate & Total Exp. points
+	- Habitat, Egg Group, Capture Rate & Base Happiness
 
 
 
