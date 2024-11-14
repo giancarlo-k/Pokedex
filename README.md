@@ -33,11 +33,11 @@
 
 
 
- <h2>Screenshots</h2>
+ <h2>Pokédex in Action</h2>
 
  <h3>Desktop</h3>
 
 | Light Mode | Dark Mode |
 | --- | --- |
 | bro | bro |
-| bro | bro |
+
