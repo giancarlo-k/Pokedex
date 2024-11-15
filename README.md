@@ -22,7 +22,7 @@
 	- Up to 7 descriptions across different Game versions
 	- View all Pokémon abilities & ability descriptions
 	- View all moves available to learn
-	- Name, type, power, accuracy & PP
+	- Move name, type, power, accuracy & PP
 	- View all stat values out of 255
 	- View Max stat total out of 1530
 	- Evolution Line & Evolution triggers (ex. Moon Stone)
