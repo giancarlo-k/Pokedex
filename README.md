@@ -52,7 +52,6 @@ These new skills include the following:
 - Local Storage
 - JSON Manipulation & Application
 - Regular Expressions
-- Problem Solving (A lot of it!)
 
  <h2>Installation</h2>
 
