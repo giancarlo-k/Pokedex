@@ -68,7 +68,7 @@ main {
   flex: 1;
   width: 100%;
   align-self: center;
-  position: relative;
+
 }
 
 .top-info-container {
@@ -781,15 +781,19 @@ tbody {
 
 @media only screen and (max-width: 1000px) {
   body {
-    height: 2420px;
+    height: 2620px;
+  }
+
+  main {
+    flex-direction: column;
   }
 
   .top-info-container {
     flex-direction: column;
     align-items: center;
-    margin-top: 300px;
     row-gap: 20px;
-    margin-top: 320px;
+
+    height: auto;
   }
 
 /*Basic info*/
@@ -864,15 +868,16 @@ tbody {
     flex-direction: column-reverse;
     align-items: center;
     row-gap: 40px;
-    margin-top: 660px;
+    height: auto;
   }
 
    /*Stats*/
 
   .stats-container {
     width: 310px;
-    height: 340px;
+    min-height: 340px;
     row-gap: 0px;
+    align-self: center;
   }
 
   .stat-name-box {
@@ -891,12 +896,15 @@ tbody {
     height: 380px;
     width: 340px;
     row-gap: 20px;
+    align-content: center;
+    align-self: center;
   }
 
   /*Evolutions*/
 
   .evolution-container {
     width: 310px;
+    align-self: center;
     height: 170px;
   }
 
@@ -911,6 +919,10 @@ tbody {
   .total-xp-box span {
     font-size: 10px;
     color: black;
+  }
+
+  .moves-container {
+    min-height: 380px;
   }
 }
 
