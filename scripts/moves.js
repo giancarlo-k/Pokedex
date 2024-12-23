@@ -3,9 +3,6 @@ import  * as data  from './data.js';
 const darkModePreference = localStorage.getItem('darkMode');
 const mainContainer = document.querySelector('.moves-container')
 
-
-
-
 function populateMoveContainerSkeletons() {
   let mainContainerHTML = '';
   data.validTypes.forEach((type) => {
